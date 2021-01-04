@@ -32,4 +32,4 @@ Freshshop already owns the frontend part of the project. You must now implement 
 
 ### See the website
 
-[***github page***](http://oop-mvc-cristina.great-site.net/)
+[***go live***](http://webshop-oop-cristina.great-site.net/)
