@@ -93,21 +93,21 @@
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
     <!-- ALL JS FILES -->
-    <script src="<?php echo $root; ?>/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/popper.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/popper.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/bootstrap.min.js"></script>
 
     <!-- ALL PLUGINS -->
-    <script src="<?php echo $root; ?>/assets/js/jquery.superslides.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/bootstrap-select.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/inewsticker.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/bootsnav.js."></script>
-    <script src="<?php echo $root; ?>/assets/js/images-loded.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/isotope.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/owl.carousel.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/baguetteBox.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/form-validator.min.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/contact-form-script.js"></script>
-    <script src="<?php echo $root; ?>/assets/js/custom.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/jquery.superslides.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/bootstrap-select.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/inewsticker.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/bootsnav.js."></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/images-loded.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/isotope.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/owl.carousel.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/baguetteBox.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/form-validator.min.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/contact-form-script.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/custom.js"></script>
 </body>
 </html>

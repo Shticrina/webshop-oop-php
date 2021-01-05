@@ -1,5 +1,4 @@
 <?php
-include('helpers/variables.php');
 ?>
 
 <!-- HTML content -->
@@ -12,7 +11,7 @@ include('helpers/variables.php');
         <div class="row">
 			<div class="col-lg-6">
                 <div class="banner-frame">
-                    <img class="img-fluid" src="<?php echo $root; ?>/assets/images/about-img.jpg" alt="" />
+                    <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/about-img.jpg" alt="" />
                 </div>
             </div>
 
@@ -55,7 +54,7 @@ include('helpers/variables.php');
             <div class="col-sm-6 col-lg-3">
                 <div class="hover-team">
                     <div class="our-team">
-                        <img src="<?php echo $root; ?>/assets/images/img-1.jpg" alt="" />
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-1.jpg" alt="" />
 
                         <div class="team-content">
                             <h3 class="title">Williamson</h3>
@@ -90,7 +89,7 @@ include('helpers/variables.php');
             <div class="col-sm-6 col-lg-3">
                 <div class="hover-team">
                     <div class="our-team">
-                        <img src="<?php echo $root; ?>/assets/images/img-2.jpg" alt="" />
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-2.jpg" alt="" />
 
                         <div class="team-content">
                             <h3 class="title">Kristiana</h3>
@@ -125,7 +124,7 @@ include('helpers/variables.php');
             <div class="col-sm-6 col-lg-3">
                 <div class="hover-team">
                     <div class="our-team">
-                        <img src="<?php echo $root; ?>/assets/images/img-3.jpg" alt="" />
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-3.jpg" alt="" />
 
                         <div class="team-content">
                             <h3 class="title">Steve Thomas</h3>
@@ -160,7 +159,7 @@ include('helpers/variables.php');
             <div class="col-sm-6 col-lg-3">
                 <div class="hover-team">
                     <div class="our-team">
-                        <img src="<?php echo $root; ?>/assets/images/img-1.jpg" alt="" />
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-1.jpg" alt="" />
 
                         <div class="team-content">
                             <h3 class="title">Williamson</h3>

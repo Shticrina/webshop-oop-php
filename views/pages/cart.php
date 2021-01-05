@@ -1,5 +1,4 @@
 <?php
-include('helpers/variables.php');
 ?>
 
 <!-- HTML content -->
@@ -27,7 +26,7 @@ include('helpers/variables.php');
                             <tr>
                                 <td class="thumbnail-img">
                                     <a href="#">
-        								<img class="img-fluid" src="images/img-pro-01.jpg" alt="" />
+        								<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" alt="" />
         							</a>
                                 </td>
                                 <td class="name-pr">
@@ -49,7 +48,7 @@ include('helpers/variables.php');
                             <tr>
                                 <td class="thumbnail-img">
                                     <a href="#">
-        								<img class="img-fluid" src="images/img-pro-02.jpg" alt="" />
+        								<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" alt="" />
         							</a>
                                 </td>
                                 <td class="name-pr">
@@ -71,7 +70,7 @@ include('helpers/variables.php');
                             <tr>
                                 <td class="thumbnail-img">
                                     <a href="#">
-        								<img class="img-fluid" src="images/img-pro-03.jpg" alt="" />
+        								<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" alt="" />
         							</a>
                                 </td>
                                 <td class="name-pr">
@@ -164,7 +163,7 @@ include('helpers/variables.php');
             </div>
 
             <div class="col-12 d-flex shopping-box">
-                <a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a>
+                <a href="/checkout" class="ml-auto btn hvr-hover">Checkout</a>
             </div>
         </div>
     </div>

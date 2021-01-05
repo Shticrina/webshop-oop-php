@@ -1,5 +1,4 @@
 <?php
-include('helpers/variables.php');
 ?>
 
 <!-- HTML content -->
@@ -40,7 +39,7 @@ include('helpers/variables.php');
                             <p class="sale">Sale</p>
                         </div>
 
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-01.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-01.jpg" class="img-fluid" alt="Image">
                         
                         <div class="mask-icon">
                             <ul>
@@ -57,7 +56,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid fruits">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-02.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-02.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -72,7 +71,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid bulbs">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-03.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-03.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -87,7 +86,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid fruits">
                 <div class="products-single fix">
                     <div class="box-img-hover">                            
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-04.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-04.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -101,7 +100,7 @@ include('helpers/variables.php');
 			<div class="col-lg-3 col-md-6 special-grid bulbs">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-05.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-05.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -116,7 +115,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid fruits">
                 <div class="products-single fix">
                     <div class="box-img-hover">                            
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-06.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-06.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -131,7 +130,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-07.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-07.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -146,7 +145,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
                 <div class="products-single fix">
                     <div class="box-img-hover">                            
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-08.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-08.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -161,7 +160,7 @@ include('helpers/variables.php');
 			<div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
                 <div class="products-single fix">
                     <div class="box-img-hover">                            
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-09.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-09.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -176,7 +175,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-10.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-10.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -191,7 +190,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid root-and-tuberous">
                 <div class="products-single fix">
                     <div class="box-img-hover">                           
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-11.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-11.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -206,7 +205,7 @@ include('helpers/variables.php');
             <div class="col-lg-3 col-md-6 special-grid podded-vegetables">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <img src="<?php echo $root; ?>/assets/images/gallery-img-12.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/gallery-img-12.jpg" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

@@ -1,5 +1,4 @@
 <?php
-include('helpers/variables.php');
 ?>
 
 <!-- HTML content -->
