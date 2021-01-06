@@ -3,13 +3,13 @@
 class App {
 	//This class contains controller, method, & params attributes, initialized with default values.
 	public $controller = 'PagesController';
-	public $method = 'index';
+	public $method = 'notFound';
 	public $params = []; // default route: HomeController, method index, no params
-	public $pages = ['about', 'gallery', 'contactUs', 'shop', 'shopDetail', 'cart', 'myAccount', 'wishlist', 'checkout'];
+	public $pages = ['home', 'about', 'gallery', 'contactUs', 'shop', 'shopDetail', 'cart', 'myAccount', 'wishlist', 'checkout', 'register', 'login'];
+	// public $handlers = ['registerHandler', 'loginHandler'];
 
 	public function __construct() {
 		$url = $this->parseURL();
-		// var_dump($url); // null
 
 		if (file_exists('controllers/' . ucfirst($url[0]) . 'Controller.php')) {
 			$this->controller = ucfirst($url[0]) . 'Controller';
@@ -18,6 +18,8 @@ class App {
 
 		if (isset($url[0]) && !in_array($url[0], $this->pages)) {
 			$this->controller = 'NotfoundController';
+		} else {
+			$this->method = 'home';
 		}
 
 		// var_dump($this->controller); // ProductController, ok
@@ -33,8 +35,6 @@ class App {
 			}
 		} elseif (isset($url[0]) && in_array($url[0], $this->pages)) {
 			$this->method = $url[0];
-		} else {
-			$this->method = 'notFound';
 		}
 
 		$this->params = $url ? array_values($url) : [];

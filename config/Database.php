@@ -6,7 +6,7 @@ class Database {
 	private $host = 'localhost';
 	private $user = 'root';
 	private $password = '';
-	private $database = 'poo_db';
+	private $database = 'webshop_db';
 	private $conn;
 
 	public function getConnection() {

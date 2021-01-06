@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>Freshshop <?php echo isset($page_title) ? '/ '.ucfirst($page_title) : ''; ?></title>
+    <title>Freshshop <?php echo "/ ".ucfirst(APP_PAGE); ?></title>
+    <title>Freshshop <?php //echo isset($page_title) ? '/ '.ucfirst($page_title) : ''; ?></title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">

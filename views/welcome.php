@@ -1,6 +1,8 @@
 <?php
-// var_dump($data['products']);
-include('helpers/variables.php');
+
+if(!isset($_SESSION)){session_start();}
+// var_dump($_SESSION);
+// session_destroy();
 ?>
 
 <!-- HTML content -->
@@ -12,7 +14,7 @@ include('helpers/variables.php');
 <div id="slides-shop" class="cover-slides">
     <ul class="slides-container">
         <li class="text-center">
-            <img src="<?php echo $root; ?>/assets/images/banner-01.jpg" alt="">
+            <img src="<?php echo APP_ROOT; ?>/assets/images/banner-01.jpg" alt="">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -25,7 +27,7 @@ include('helpers/variables.php');
         </li>
 
         <li class="text-center">
-            <img src="<?php echo $root; ?>/assets/images/banner-02.jpg" alt="">
+            <img src="<?php echo APP_ROOT; ?>/assets/images/banner-02.jpg" alt="">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -38,7 +40,7 @@ include('helpers/variables.php');
         </li>
 
         <li class="text-center">
-            <img src="<?php echo $root; ?>/assets/images/banner-03.jpg" alt="">
+            <img src="<?php echo APP_ROOT; ?>/assets/images/banner-03.jpg" alt="">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -64,21 +66,21 @@ include('helpers/variables.php');
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="<?php echo $root; ?>/assets/images/categories_img_01.jpg" alt="" />
+                    <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/categories_img_01.jpg" alt="" />
                     <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="<?php echo $root; ?>/assets/images/categories_img_02.jpg" alt="" />
+                    <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/categories_img_02.jpg" alt="" />
                     <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="<?php echo $root; ?>/assets/images/categories_img_03.jpg" alt="" />
+                    <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/categories_img_03.jpg" alt="" />
                     <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
                 </div>
             </div>
@@ -92,13 +94,13 @@ include('helpers/variables.php');
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-12">
 				<div class="offer-box-products">
-					<img class="img-fluid" src="<?php echo $root; ?>/assets/images/add-img-01.jpg" alt="" />
+					<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/add-img-01.jpg" alt="" />
 				</div>
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-12">
 				<div class="offer-box-products">
-					<img class="img-fluid" src="<?php echo $root; ?>/assets/images/add-img-02.jpg" alt="" />
+					<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/add-img-02.jpg" alt="" />
 				</div>
 			</div>
 		</div>
@@ -137,7 +139,7 @@ include('helpers/variables.php');
                             <p class="sale">Sale</p>
                         </div>
 
-                        <img src="<?php echo $root; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
 
                         <div class="mask-icon">
                             <ul>
@@ -163,7 +165,7 @@ include('helpers/variables.php');
                             <p class="new">New</p>
                         </div>
 
-                        <img src="<?php echo $root; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
 
                         <div class="mask-icon">
                             <ul>
@@ -189,7 +191,7 @@ include('helpers/variables.php');
                             <p class="sale">Sale</p>
                         </div>
 
-                        <img src="<?php echo $root; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
                         
                         <div class="mask-icon">
                             <ul>
@@ -215,7 +217,7 @@ include('helpers/variables.php');
                             <p class="sale">Sale</p>
                         </div>
 
-                        <img src="<?php echo $root; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
+                        <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
 
                         <div class="mask-icon">
                             <ul>
@@ -254,7 +256,7 @@ include('helpers/variables.php');
             <div class="col-md-6 col-lg-4 col-xl-4">
                 <div class="blog-box">
                     <div class="blog-img">
-                        <img class="img-fluid" src="<?php echo $root; ?>/assets/images/blog-img.jpg" alt="" />
+                        <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/blog-img.jpg" alt="" />
                     </div>
 
                     <div class="blog-content">
@@ -275,7 +277,7 @@ include('helpers/variables.php');
             <div class="col-md-6 col-lg-4 col-xl-4">
                 <div class="blog-box">
                     <div class="blog-img">
-                        <img class="img-fluid" src="<?php echo $root; ?>/assets/images/blog-img-01.jpg" alt="" />
+                        <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/blog-img-01.jpg" alt="" />
                     </div>
 
                     <div class="blog-content">
@@ -296,7 +298,7 @@ include('helpers/variables.php');
             <div class="col-md-6 col-lg-4 col-xl-4">
                 <div class="blog-box">
                     <div class="blog-img">
-                        <img class="img-fluid" src="<?php echo $root; ?>/assets/images/blog-img-02.jpg" alt="" />
+                        <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/blog-img-02.jpg" alt="" />
                     </div>
 
                     <div class="blog-content">

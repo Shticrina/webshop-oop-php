@@ -2,7 +2,7 @@
 
 class PagesController extends Controller {
 
-	public function index() {
+	public function home() {
   		$productModel = $this->model('Product');
 	    $products = $productModel->listAll();
 	    $this->view('welcome', ['products' => $products, 'nb_products' => $productModel->countProducts]);
@@ -43,6 +43,18 @@ class PagesController extends Controller {
 	public function wishlist() {
 		$this->view('pages/wishlist');
 	}
+
+	public function register() {
+		$this->view('auth/register');
+	}
+
+	public function login() {
+		$this->view('auth/login');
+	}
+
+	public function notFound() {
+  		$this->view('404');
+  	}
 }
 
 ?>

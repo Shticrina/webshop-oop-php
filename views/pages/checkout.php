@@ -1,4 +1,5 @@
 <?php
+session_start();
 ?>
 
 <!-- HTML content -->
@@ -16,7 +17,8 @@
 
                 <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Click here to Login</a></h5>
                 
-                <form class="mt-3 collapse review-form-box" id="formLogin">
+                <?php include('./views/layouts/loginForm.php'); ?>
+                <!-- <form class="mt-3 collapse review-form-box" id="formLogin">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="InputEmail" class="mb-0">Email Address</label>
@@ -30,7 +32,7 @@
                     </div>
 
                     <button type="submit" class="btn hvr-hover">Login</button>
-                </form>
+                </form> -->
             </div>
 
             <div class="col-sm-6 col-lg-6 mb-3">
@@ -42,7 +44,8 @@
                     <a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Click here to Register</a>
                 </h5>
 
-                <form class="mt-3 collapse review-form-box" id="formRegister">
+                <?php include('./views/layouts/registerForm.php'); ?>
+                <!-- <form class="mt-3 collapse review-form-box" id="formRegister">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="InputName" class="mb-0">First Name</label>
@@ -66,7 +69,7 @@
                     </div>
 
                     <button type="submit" class="btn hvr-hover">Register</button>
-                </form>
+                </form> -->
             </div>
         </div>
 

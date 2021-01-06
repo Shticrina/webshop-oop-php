@@ -28,6 +28,10 @@ a:hover {
 	color: #720c0c;
 }
 
+.text-kaki {
+	color: #b0b435;
+}
+
 /*Style Toastr messages*/
 .toast-top-center,
 .toast-top-full-width { 

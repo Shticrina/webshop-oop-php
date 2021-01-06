@@ -141,6 +141,9 @@
  .bootstrap-select .dropdown-toggle:focus{
      box-shadow: none !important 
 }
+.text-kaki {
+    color: #b0b435;
+}
 /*------------------------------------------------------------------ LOADER -------------------------------------------------------------------*/
  #back-to-top {
      position: fixed;
