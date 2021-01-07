@@ -319,7 +319,7 @@ if(!isset($_SESSION)){session_start();}
     </div>
 </div>
 <!-- End Blog -->
-<!-- End About Page -->
+<!-- End Home Page -->
 
 <?php include('./views/layouts/instagramFeed.php'); ?>
 <?php include('./views/layouts/footer.php'); ?>

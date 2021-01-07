@@ -43,6 +43,50 @@ class UserController extends Controller {
 		}
 	}
 
+	public function login() {
+		$data = [];
+		session_start();
+
+		if (isset($_POST['loginBtn'])) {
+    		$validation = $this->validationLogin($_POST);
+
+			$data['errors'] = $validation['errors'];
+			$data['values'] = $validation['values'];
+
+			if (count($data['errors']) == 0) {
+		        $currentUser = $this->userModel->getUserByEmail($data['values']['email']); // array OR false
+		        // var_dump($currentUser);
+
+		        // check if the user email exists in the db & if password match
+		        if ($currentUser != false) {
+		            if (password_verify($data['values']['password'], $currentUser['password'])) {
+		                $_SESSION['user'] = $currentUser;
+
+		                // update user in the db: is_connected = true
+		                $updateUser = $this->userModel->updateUserByConnection($currentUser['user_id'], true); // true or false
+		                // var_dump($updateUser); // false
+
+		                if ($updateUser) {
+		                    $_SESSION['user']['is_connected'] = true;
+		                    $_SESSION['success_message'] = "You are now logged in.";
+
+		                    header('location: /');
+		                }
+		            } else {
+		                $data['errors']['credentials'] = "Wrong credentials! Please try again.";
+		            }
+		        } else {
+		            $data['errors']['credentials'] = "Wrong credentials! Please try again.";
+		        }
+			}
+
+			$this->view('auth/login', $data);
+		} else {
+			// the user accessed this page without passing by the form => redirect the user to the 404 page
+	    	$this->view('404');
+		}
+	}
+
 	function validationLogin($form) {
 		$result = [];
 		$errors = [];
@@ -161,50 +205,6 @@ class UserController extends Controller {
 		$result['errors'] = $errors;
 
 		return $result;
-	}
-
-	public function login() {
-		$data = [];
-		session_start();
-
-		if (isset($_POST['loginBtn'])) {
-    		$validation = $this->validationLogin($_POST);
-
-			$data['errors'] = $validation['errors'];
-			$data['values'] = $validation['values'];
-
-			if (count($data['errors']) == 0) {
-		        $currentUser = $this->userModel->getUserByEmail($data['values']['email']); // array OR false
-		        // var_dump($currentUser);
-
-		        // check if the user email exists in the db & if password match
-		        if ($currentUser != false) {
-		            if (password_verify($data['values']['password'], $currentUser['password'])) {
-		                $_SESSION['user'] = $currentUser;
-
-		                // update user in the db: is_connected = true
-		                $updateUser = $this->userModel->updateUserByConnection($currentUser['user_id'], true); // true or false
-		                // var_dump($updateUser); // false
-
-		                if ($updateUser) {
-		                    $_SESSION['user']['is_connected'] = true;
-		                    $_SESSION['success_message'] = "You are now logged in.";
-
-		                    header('location: /');
-		                }
-		            } else {
-		                $data['errors']['credentials'] = "Wrong credentials! Please try again.";
-		            }
-		        } else {
-		            $data['errors']['credentials'] = "Wrong credentials! Please try again.";
-		        }
-			}
-
-			$this->view('auth/login', $data);
-		} else {
-			// the user accessed this page without passing by the form => redirect the user to the 404 page
-	    	$this->view('404');
-		}
 	}
 
 	public function logout() {

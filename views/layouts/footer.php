@@ -1,32 +1,56 @@
-	<!-- Start Footer  -->
+<?php 
+
+// var_dump($_SESSION);
+// var_dump($_SERVER['REQUEST_URI']);
+$current_route = $_SERVER['REQUEST_URI'];
+$email = isset($_SESSION['values']) && isset($_SESSION['values']['email']) ? $_SESSION['values']['email'] : "";
+$emailError = isset($_SESSION['errors']) && isset($_SESSION['errors']['email']) ? $_SESSION['errors']['email'] : "";
+$success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : null;
+unset($_SESSION['success_message']);
+unset($_SESSION['values']);
+unset($_SESSION['errors']);
+?>
+    <!-- Start Footer  -->
     <footer>
-        <div class="footer-main">
+        <div class="footer-main" id="footerMain">
             <div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Business Time</h3>
+
 							<ul class="list-time">
 								<li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
 							</ul>
 						</div>
 					</div>
+
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Newsletter</h3>
-							<form class="newsletter-box">
+
+							<form action="/newsletter/create" method="POST" class="newsletter-box">
+                                <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
 								<div class="form-group">
-									<input class="" type="email" name="Email" placeholder="Email Address*" />
+									<input class="" type="email" name="news_email" value="<?php echo $email; ?>" placeholder="Email Address*" />
 									<i class="fa fa-envelope"></i>
+                                    <p class="text-danger"><?php echo $emailError; ?></p>
 								</div>
-								<button class="btn hvr-hover" type="submit">Submit</button>
+
+								<button class="btn hvr-hover" type="submit" name="newsletterBtn">Submit</button>
 							</form>
+
+                            <?php if (isset($success_message)) { ?>
+                                <h4 class="text-white font-italic mt-3 pb-0"><?php echo $success_message; ?></h4>
+                            <?php } ?>
 						</div>
 					</div>
+
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Social Media</h3>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
 							<ul>
                                 <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
@@ -39,20 +63,25 @@
 						</div>
 					</div>
 				</div>
+
 				<hr>
+
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
                             <h4>About Freshshop</h4>
+
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-link">
                             <h4>Information</h4>
+
                             <ul>
-                                <li><a href="#">About Us</a></li>
+                                <li><a href="/about">About Us</a></li>
                                 <li><a href="#">Customer Service</a></li>
                                 <li><a href="#">Our Sitemap</a></li>
                                 <li><a href="#">Terms &amp; Conditions</a></li>
@@ -61,9 +90,11 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-link-contact">
                             <h4>Contact Us</h4>
+
                             <ul>
                                 <li>
                                     <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
@@ -86,7 +117,8 @@
     <!-- Start copyright  -->
     <div class="footer-copyright">
         <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a></p>
+            <a href="https://html.design/">html design</a>
+        </p>
     </div>
     <!-- End copyright  -->
 
