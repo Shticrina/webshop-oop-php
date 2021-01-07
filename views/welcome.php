@@ -1,8 +1,9 @@
 <?php
 
 if(!isset($_SESSION)){session_start();}
-// var_dump($_SESSION);
-// session_destroy();
+
+$products = $data['products'];
+$categories = $data['categories'];
 ?>
 
 <!-- HTML content -->
@@ -64,26 +65,14 @@ if(!isset($_SESSION)){session_start();}
 <div class="categories-shop">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/categories_img_01.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
+            <?php foreach ($categories as $category) { ?>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="shop-cat-box">
+                        <img class="img-fluid" src="<?php echo APP_ROOT.''.$category['category_image']; ?>" alt="" />
+                        <a class="btn hvr-hover" href="#"><?php echo $category['category_name']; ?></a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/categories_img_02.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/categories_img_03.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </div>

@@ -10,6 +10,13 @@ class ProductController extends Controller {
   	public function notFound() {
   		$this->view('404');
   	}
+
+  	/*public function categories() {
+  		$categories = $this->model('Category')->getAllCategories();
+	    $this->view('welcome', ['categories' => $categories]);
+	    $this->view('pages/galerry', ['categories' => $categories]);
+	    $this->view('pages/shop', ['categories' => $categories]);
+  	}*/
 }
 
 ?>

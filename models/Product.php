@@ -16,23 +16,34 @@ class Product {
     public $description;
     public $category_id;
     public $category_name;
-    public $countProducts = 0;
+    public $category_slug;
   
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    function listAll() {
-        $query = "SELECT * FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id ORDER BY name LIMIT 10";
+    function getAllProducts() {
+        $query = "SELECT * FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id ORDER BY id";
 
         $stmt = $this->conn->prepare($query); // prepare the request in a statement
 		$stmt->execute(); // execute the statement
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 		$rows = $result ? $stmt->fetchAll() : [];
-		$this->countProducts = $stmt->rowCount();
 
-		return $rows; // we will use rowCount();
+		return $rows;
+    }
+
+    function getProductsByCat($catId) {
+        $query = "SELECT $this->table_name.name, $this->table_name.description, $this->table_name.price, $this->table_name.stock FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.category_id = $catId";
+      
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $rows = $result ? $stmt->fetchAll() : [];
+
+        return $rows;
     }
   
     // create product
@@ -64,7 +75,7 @@ class Product {
     }
 
     function getProduct($id) {
-	    $query = "SELECT * FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE id = ?";
+	    $query = "SELECT * FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.id = ?";
 	  
 	    $stmt = $this->conn->prepare($query);
 	    $stmt->bindParam(1, $id);

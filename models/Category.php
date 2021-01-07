@@ -11,22 +11,22 @@ class Category {
     private $table_name = "categories";
   
     // object properties
-    public $id;
-    public $name;
+    public $category_name;
   
     public function __construct($db) {
         $this->conn = $db;
     }
   
-    // used by select drop-down list
-    function listAll() {
-        //select all data
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY name";
-  
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-  
-        return $stmt;
+    function getAllCategories() {
+        //select all categories
+        $request = "SELECT * FROM $this->table_name ORDER BY category_name";
+
+        $stmt = $this->conn->prepare($request); // prepare the request in a statement
+        $stmt->execute(); // execute the statement
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $rows = $result ? $stmt->fetchAll() : [];
+
+        return $rows;
     }
 }
 

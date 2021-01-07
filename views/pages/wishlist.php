@@ -26,7 +26,7 @@ session_start();
                         <tbody>
                             <tr>
                                 <td class="thumbnail-img">
-                                    <a href="#"><img class="img-fluid" src="images/img-pro-01.jpg" alt="" /></a>
+                                    <a href="#"><img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" alt="" /></a>
                                 </td>
                                 <td class="name-pr">
                                     <a href="#">Lorem ipsum dolor sit amet</a>
@@ -45,7 +45,7 @@ session_start();
 
                             <tr>
                                 <td class="thumbnail-img">
-                                    <a href="#"><img class="img-fluid" src="images/img-pro-02.jpg" alt="" /></a>
+                                    <a href="#"><img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" alt="" /></a>
                                 </td>
                                 <td class="name-pr">
                                     <a href="#">Lorem ipsum dolor sit amet</a>
@@ -64,7 +64,7 @@ session_start();
 
                             <tr>
                                 <td class="thumbnail-img">
-                                    <a href="#"><img class="img-fluid" src="images/img-pro-03.jpg" alt="" /></a>
+                                    <a href="#"><img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" alt="" /></a>
                                 </td>
                                 <td class="name-pr">
                                     <a href="#">Lorem ipsum dolor sit amet</a>

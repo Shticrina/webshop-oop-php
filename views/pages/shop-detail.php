@@ -14,15 +14,15 @@ session_start();
                 <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="images/big-img-01.jpg" alt="First slide">
+                            <img class="d-block w-100" src="<?php echo APP_ROOT; ?>/assets/images/big-img-01.jpg" alt="First slide">
                         </div>
 
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="images/big-img-02.jpg" alt="Second slide">
+                            <img class="d-block w-100" src="<?php echo APP_ROOT; ?>/assets/images/big-img-02.jpg" alt="Second slide">
                         </div>
 
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="images/big-img-03.jpg" alt="Third slide">
+                            <img class="d-block w-100" src="<?php echo APP_ROOT; ?>/assets/images/big-img-03.jpg" alt="Third slide">
                         </div>
                     </div>
 
@@ -38,13 +38,13 @@ session_start();
 
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                            <img class="d-block w-100 img-fluid" src="images/smp-img-01.jpg" alt="" />
+                            <img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/smp-img-01.jpg" alt="" />
                         </li>
                         <li data-target="#carousel-example-1" data-slide-to="1">
-                            <img class="d-block w-100 img-fluid" src="images/smp-img-02.jpg" alt="" />
+                            <img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/smp-img-02.jpg" alt="" />
                         </li>
                         <li data-target="#carousel-example-1" data-slide-to="2">
-                            <img class="d-block w-100 img-fluid" src="images/smp-img-03.jpg" alt="" />
+                            <img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/smp-img-03.jpg" alt="" />
                         </li>
                     </ol>
                 </div>
@@ -154,7 +154,7 @@ session_start();
                     <div class="item">
                         <div class="products-single fix">
                             <div class="box-img-hover">
-                                <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
 
                                 <div class="mask-icon">
                                     <ul>
@@ -183,7 +183,7 @@ session_start();
                     <div class="item">
                         <div class="products-single fix">
                             <div class="box-img-hover">
-                                <img src="images/img-pro-02.jpg" class="img-fluid" alt="Image">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
 
                                 <div class="mask-icon">
                                     <ul>
@@ -205,52 +205,7 @@ session_start();
                     <div class="item">
                         <div class="products-single fix">
                             <div class="box-img-hover">
-                                <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
-
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
-
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="images/img-pro-04.jpg" class="img-fluid" alt="Image">
-
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
-
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="images/img-pro-01.jpg" class="img-fluid" alt="Image">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
 
                                 <div class="mask-icon">
                                     <ul>
@@ -273,7 +228,29 @@ session_start();
                     <div class="item">
                         <div class="products-single fix">
                             <div class="box-img-hover">
-                                <img src="images/img-pro-02.jpg" class="img-fluid" alt="Image">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
+
+                                <div class="mask-icon">
+                                    <ul>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+                                    <a class="cart" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+
+                            <div class="why-text">
+                                <h4>Lorem ipsum dolor sit amet</h4>
+                                <h5> $9.79</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="products-single fix">
+                            <div class="box-img-hover">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
 
                                 <div class="mask-icon">
                                     <ul>
@@ -296,7 +273,7 @@ session_start();
                     <div class="item">
                         <div class="products-single fix">
                             <div class="box-img-hover">
-                                <img src="images/img-pro-03.jpg" class="img-fluid" alt="Image">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
 
                                 <div class="mask-icon">
                                     <ul>
@@ -319,7 +296,30 @@ session_start();
                     <div class="item">
                         <div class="products-single fix">
                             <div class="box-img-hover">
-                                <img src="images/img-pro-04.jpg" class="img-fluid" alt="Image">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
+
+                                <div class="mask-icon">
+                                    <ul>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+
+                                    <a class="cart" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+
+                            <div class="why-text">
+                                <h4>Lorem ipsum dolor sit amet</h4>
+                                <h5> $9.79</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="products-single fix">
+                            <div class="box-img-hover">
+                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
 
                                 <div class="mask-icon">
                                     <ul>

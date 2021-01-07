@@ -14,7 +14,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 <div class="my-account-box-main">
     <div class="container">
         <div class="d-flex justify-content-center">
-            <h4 class="text-dark display-4">Welcome <span class="text-kaki"><?php echo ucfirst($user['first_name'])." ".ucfirst($user['last_name']); ?></span>!</h4>
+            <h4 class="text-dark display-4">Welcome <span class="text-kaki"><?php echo ucfirst($user['first_name'])." ".ucfirst($user['last_name']); ?></span>!
+            </h4>
         </div>
 
         <div class="my-account-page">

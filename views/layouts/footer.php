@@ -1,11 +1,10 @@
 <?php 
 
-// var_dump($_SESSION);
-// var_dump($_SERVER['REQUEST_URI']);
 $current_route = $_SERVER['REQUEST_URI'];
 $email = isset($_SESSION['values']) && isset($_SESSION['values']['email']) ? $_SESSION['values']['email'] : "";
 $emailError = isset($_SESSION['errors']) && isset($_SESSION['errors']['email']) ? $_SESSION['errors']['email'] : "";
 $success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : null;
+
 unset($_SESSION['success_message']);
 unset($_SESSION['values']);
 unset($_SESSION['errors']);

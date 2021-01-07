@@ -3,9 +3,10 @@
 class PagesController extends Controller {
 
 	public function home() {
-  		$productModel = $this->model('Product');
-	    $products = $productModel->listAll();
-	    $this->view('welcome', ['products' => $products, 'nb_products' => $productModel->countProducts]);
+		$categories = $this->model('Category')->getAllCategories();
+  		$products = $this->model('Product')->getAllProducts();
+
+	    $this->view('welcome', ['categories' => $categories, 'products' => $products]);
   	}
   	
 	public function about() {
@@ -13,11 +14,25 @@ class PagesController extends Controller {
 	}
 
 	public function gallery() {
-		$this->view('pages/gallery');
+		$categories = $this->model('Category')->getAllCategories();
+		$products = $this->model('Product')->getAllProducts();
+
+	    $this->view('pages/gallery', ['categories' => $categories, 'products' => $products]);
 	}
 
 	public function shop() {
-		$this->view('pages/shop');
+		$categories = $this->model('Category')->getAllCategories();
+		$products = $this->model('Product')->getAllProducts();
+		$completeCategories = [];
+
+		// categories with products
+		foreach ($categories as $category) {
+			$cat_products = $this->model('Product')->getProductsByCat($category['category_id']);
+			$category['products'] = $cat_products;
+			array_push($completeCategories, $category);
+		}
+
+	    $this->view('pages/shop', ['categories' => $completeCategories, 'products' => $products]);
 	}
 
 	public function shopDetail() {
