@@ -34,8 +34,25 @@ class Product {
 		return $rows;
     }
 
+    function searchProducts($input) {
+        $query = "SELECT $this->table_name.name, $this->table_name.description, $this->table_name.price, $this->table_name.image, $this->table_name.stock, $this->table_name.label 
+            FROM $this->table_name 
+            JOIN categories 
+            ON categories.category_id = $this->table_name.category_id 
+            WHERE $this->table_name.name like '%$input%'";
+            // OR categories.category_name like '%$input%'";
+      
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $rows = $result ? $stmt->fetchAll() : [];
+
+        return $rows;
+    }
+
     function getProductsByCat($catId) {
-        $query = "SELECT $this->table_name.name, $this->table_name.description, $this->table_name.price, $this->table_name.stock FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.category_id = $catId";
+        $query = "SELECT $this->table_name.name, $this->table_name.description, $this->table_name.price, $this->table_name.stock, $this->table_name.label FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.category_id = $catId";
       
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

@@ -174,11 +174,14 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 <!-- Start Top Search -->
 <div class="top-search">
     <div class="container">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-        </div>
+        <form action="/product/search" method="POST">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="search" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                <button type="submit" name="searchBtn" class="d-none"></button>
+            </div>
+        </form>
     </div>
 </div>
 <!-- End Top Search -->

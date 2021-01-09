@@ -1,8 +1,11 @@
 <?php
-session_start();
 
-$products = $data['products'];
+if(!isset($_SESSION)){session_start();}
+
+$products = isset($_SESSION['products']) ? $_SESSION['products'] : $data['products'];
 $categories = $data['categories'];
+unset($_SESSION['products']);
+// var_dump($products);
 ?>
 
 <!-- HTML content -->
@@ -52,10 +55,11 @@ $categories = $data['categories'];
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                        <p class="sale">Sale</p>
-                                                        <!-- <p class="new">New</p> -->
-                                                    </div>
+                                                    <?php if (isset($product['label'])) { ?>
+                                                        <div class="type-lb">
+                                                            <p class="<?php echo $product['label']; ?>"><?php echo ucfirst($product['label']); ?></p>
+                                                        </div>
+                                                    <?php } ?>
 
                                                     <img src="<?php echo APP_ROOT.''.$product['image']; ?>" class="img-fluid" alt="Image">
 
@@ -77,183 +81,6 @@ $categories = $data['categories'];
                                             </div>
                                         </div>
                                     <?php } ?>
-
-                                    <!-- <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="new">New</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="sale">Sale</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="new">New</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="sale">Sale</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="sale">Sale</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="sale">Sale</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="sale">Sale</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                        <div class="products-single fix">
-                                            <div class="box-img-hover">
-                                                <div class="type-lb">
-                                                    <p class="new">New</p>
-                                                </div>
-                                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
-                                                <div class="mask-icon">
-                                                    <ul>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                                    </ul>
-                                                    <a class="cart" href="#">Add to Cart</a>
-                                                </div>
-                                            </div>
-                                            <div class="why-text">
-                                                <h4>Lorem ipsum dolor sit amet</h4>
-                                                <h5> $9.79</h5>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
 
@@ -264,10 +91,11 @@ $categories = $data['categories'];
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="products-single fix">
                                                     <div class="box-img-hover">
-                                                        <div class="type-lb">
-                                                            <p class="new">New</p>
-                                                            <!-- <p class="sale">Sale</p> -->
-                                                        </div>
+                                                        <?php if (isset($product['label'])) { ?>
+                                                            <div class="type-lb">
+                                                                <p class="<?php echo $product['label']; ?>"><?php echo ucfirst($product['label']); ?></p>
+                                                            </div>
+                                                        <?php } ?>
 
                                                         <img src="<?php echo APP_ROOT.''.$product['image']; ?>" class="img-fluid" alt="Image">
 
@@ -303,9 +131,9 @@ $categories = $data['categories'];
 			<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                 <div class="product-categori">
                     <div class="search-product">
-                        <form action="#">
-                            <input class="form-control" placeholder="Search here..." type="text">
-                            <button type="submit"> <i class="fa fa-search"></i> </button>
+                        <form action="/product/search" method="POST">
+                            <input class="form-control" name="search" placeholder="Search here..." type="text">
+                            <button type="submit" name="searchBtn"> <i class="fa fa-search"></i> </button>
                         </form>
                     </div>
 
@@ -318,7 +146,7 @@ $categories = $data['categories'];
 
                             <?php foreach ($categories as $category) { ?>
                                 <div class="list-group-collapse sub-men">
-                                    <a class="list-group-item list-group-item-action" href="#sub-men<?php echo $category['category_id']?>" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men<?php echo $category['category_id']?>"><?php echo ucfirst($category['category_name']); ?> <small class="text-muted">(100)</small></a>
+                                    <a class="list-group-item list-group-item-action" href="#sub-men<?php echo $category['category_id']; ?>" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men<?php echo $category['category_id']; ?>"><?php echo ucfirst($category['category_name']); ?> <small class="text-muted">(<?php echo count($category['products']); ?>)</small></a>
 
                                     <div class="collapse show" id="sub-men<?php echo $category['category_id']?>" data-parent="#list-group-men">
                                         <div class="list-group">
