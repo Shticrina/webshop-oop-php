@@ -1,6 +1,7 @@
 <?php
 
 include('config/Database.php');
+include('config/Mail.php');
 
 class Controller {
 
@@ -22,6 +23,22 @@ class Controller {
 		} else {
 		  	echo "ERROR: View $view not found!";
 		}
+  	}
+
+  	protected function sendEmail($from, $fromName, $subject, $body) {
+  		$mail = new Mail();
+  		$mail->config->SetFrom($from, $fromName); // From email address and name
+        $mail->config->Subject = $subject;
+        $mail->config->Body = $body;
+  		// var_dump($mail->config);
+
+  		/*if (!$mail->config->send()) { // true or false
+            echo "Sorry! Something's wrong: ".$mail->config->ErrorInfo;
+            return false;
+		}*/
+
+        return true;
+        // return $mail->config->send();
   	}
 }
 

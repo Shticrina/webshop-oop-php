@@ -1,4 +1,4 @@
-$("#contactForm").validator().on("submit", function (event) {
+/*$("#contactForm").validator().on("submit", function (event) {
     if (event.isDefaultPrevented()) {
         // handle the invalid form...
         formError();
@@ -10,14 +10,12 @@ $("#contactForm").validator().on("submit", function (event) {
     }
 });
 
-
 function submitForm(){
     // Initiate Variables With Form Content
     var name = $("#name").val();
     var email = $("#email").val();
     var msg_subject = $("#msg_subject").val();
     var message = $("#message").val();
-
 
     $.ajax({
         type: "POST",
@@ -52,4 +50,4 @@ function submitMSG(valid, msg){
         var msgClasses = "h3 text-center text-danger";
     }
     $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
-}
+}*/
