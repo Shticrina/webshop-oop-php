@@ -108,7 +108,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                         <ul class="dropdown-menu">
 							<li><a href="/shop">Sidebar Shop</a></li>
-							<li><a href="/shopDetail">Shop Detail</a></li>
+							<!-- <li><a href="/shopDetail">Shop Detail</a></li> -->
                             <li><a href="/cart">Cart</a></li>
                             <li><a href="/checkout">Checkout</a></li>
                             <li><a href="/myAccount">My Account</a></li>

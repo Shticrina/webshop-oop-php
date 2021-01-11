@@ -2,9 +2,14 @@
 
 class ProductController extends Controller {
 
-	public function detail($product_id) {
-		$product = $this->model('Product')->getProduct($product_id);
-		$this->view('product/show', ['product' => $product]);
+	public function detail($slug) { // slug
+		$product = $this->model('Product')->getProduct($slug);
+		
+		if ($product) {
+			$this->view('product/show', ['product' => $product]);
+		} else {
+			$this->view('404');
+		}
 	}
 
 	public function notFound() {
@@ -26,6 +31,12 @@ class ProductController extends Controller {
 			// the user accessed this page without passing by the form => redirect the user to the 404 page
 	    	$this->view('404');
 		}
+	}
+
+	public function addProduct() {
+		// $word = "dgdS Dddddd??.. ; fooo";
+		// var_dump($word, $this->slugify($word)); // ok
+		// $this->view('404');
 	}
 }
 

@@ -52,7 +52,7 @@ class Product {
     }
 
     function getProductsByCat($catId) {
-        $query = "SELECT $this->table_name.name, $this->table_name.description, $this->table_name.price, $this->table_name.stock, $this->table_name.label FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.category_id = $catId";
+        $query = "SELECT $this->table_name.name, $this->table_name.slug, $this->table_name.description, $this->table_name.price, $this->table_name.stock, $this->table_name.label FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.category_id = $catId";
       
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -91,11 +91,11 @@ class Product {
         return $stmt->execute();
     }
 
-    function getProduct($id) {
-	    $query = "SELECT * FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.id = ?";
+    function getProduct($slug) {
+	    $query = "SELECT * FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.slug = ?";
 	  
 	    $stmt = $this->conn->prepare($query);
-	    $stmt->bindParam(1, $id);
+	    $stmt->bindParam(1, $slug);
 	    $stmt->execute();
 
 	    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);

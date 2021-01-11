@@ -65,9 +65,9 @@ unset($_SESSION['products']);
 
                                                     <div class="mask-icon">
                                                         <ul>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                            <li><a href="/product/detail/<?php echo $product['slug']; ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                            <li><a href="/wishlist" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                         </ul>
 
                                                         <a class="cart" href="#">Add to Cart</a>
@@ -101,9 +101,9 @@ unset($_SESSION['products']);
 
                                                         <div class="mask-icon">
                                                             <ul>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                                <li><a href="/product/detail/<?php echo $product['slug']; ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                                <li><a href="/wishlist" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                             </ul>
 
                                                         </div>
@@ -151,7 +151,7 @@ unset($_SESSION['products']);
                                     <div class="collapse show" id="sub-men<?php echo $category['category_id']?>" data-parent="#list-group-men">
                                         <div class="list-group">
                                             <?php foreach ($category['products'] as $prod) { ?>
-                                                <a href="#" class="list-group-item list-group-item-action active"><?php echo $prod['name']?> <small class="text-muted">(<?php echo $prod['stock']?>)</small></a>
+                                                <a href="/product/detail/<?php echo $prod['slug']; ?>" class="list-group-item list-group-item-action active"><?php echo $prod['name']?> <small class="text-muted">(<?php echo $prod['stock']?>)</small></a>
                                             <?php } ?>
                                         </div>
                                     </div>

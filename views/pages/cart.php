@@ -27,7 +27,7 @@ if(!isset($_SESSION)){session_start();}
                         <tbody>
                             <tr>
                                 <td class="thumbnail-img">
-                                    <a href="#">
+                                    <a href="/product/detail/<?php //echo $product['slug']; ?>">
         								<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" alt="" />
         							</a>
                                 </td>

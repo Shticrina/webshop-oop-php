@@ -1,6 +1,9 @@
 <?php
 
 if(!isset($_SESSION)){session_start();}
+
+$product = $data['product'];
+// var_dump($product);
 ?>
 
 <!-- HTML content -->
