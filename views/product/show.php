@@ -3,7 +3,11 @@
 if(!isset($_SESSION)){session_start();}
 
 $product = $data['product'];
-// var_dump($product);
+$current_route = $_SERVER['REQUEST_URI'];
+$wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishlistProductIds'] : null;
+
+$success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : null;
+unset($_SESSION['success_message']);
 ?>
 
 <!-- HTML content -->
@@ -12,59 +16,65 @@ $product = $data['product'];
 
 <!-- Start Shop Detail Page -->
 <div class="shop-detail-box-main">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-5 col-lg-5 col-md-6">
-                <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="First slide">
-                        </div>
-
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="Second slide">
-                        </div>
-
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="Third slide">
-                        </div>
-                    </div>
-
-                    <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
-    					<i class="fa fa-angle-left" aria-hidden="true"></i>
-    					<span class="sr-only">Previous</span> 
-    				</a>
-
-                    <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> 
-    					<i class="fa fa-angle-right" aria-hidden="true"></i> 
-    					<span class="sr-only">Next</span> 
-    				</a>
-
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                            <img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="" />
-                        </li>
-                        <li data-target="#carousel-example-1" data-slide-to="1">
-                            <img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="" />
-                        </li>
-                        <li data-target="#carousel-example-1" data-slide-to="2">
-                            <img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="" />
-                        </li>
-                    </ol>
-                </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+                <?php if (isset($success_message)) { ?>
+                    <h3 class="text-kaki font-italic mb-2 pl-3"><?php echo $success_message; ?></h3>
+                <?php } ?>
             </div>
 
-            <div class="col-xl-7 col-lg-7 col-md-6">
-                <div class="single-product-details">
-                    <h2><?php echo ucfirst($product['name']); ?></h2>
+			<div class="col-xl-5 col-lg-5 col-md-6">
+				<div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<img class="d-block w-100" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="First slide">
+						</div>
 
-                    <h5> <del>$ <?php echo $product['price']*1.03; ?></del> $<?php echo $product['price']; ?></h5>
-                    <p class="available-stock"><span> More than <?php echo $product['stock']-1; ?> available / <a href="#">8 sold </a></span><p>
+						<div class="carousel-item">
+							<img class="d-block w-100" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="Second slide">
+						</div>
+
+						<div class="carousel-item">
+							<img class="d-block w-100" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="Third slide">
+						</div>
+					</div>
+
+					<a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
+						<i class="fa fa-angle-left" aria-hidden="true"></i>
+						<span class="sr-only">Previous</span> 
+					</a>
+
+					<a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> 
+						<i class="fa fa-angle-right" aria-hidden="true"></i> 
+						<span class="sr-only">Next</span> 
+					</a>
+
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-1" data-slide-to="0" class="active">
+							<img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="" />
+						</li>
+						<li data-target="#carousel-example-1" data-slide-to="1">
+							<img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="" />
+						</li>
+						<li data-target="#carousel-example-1" data-slide-to="2">
+							<img class="d-block w-100 img-fluid" src="<?php echo APP_ROOT.''.$product['image']; ?>" alt="" />
+						</li>
+					</ol>
+				</div>
+			</div>
+
+			<div class="col-xl-7 col-lg-7 col-md-6">
+				<div class="single-product-details">
+					<h2><?php echo ucfirst($product['name']); ?></h2>
+
+					<h5> <del>$ <?php echo $product['price']*1.03; ?></del> $<?php echo $product['price']; ?></h5>
+					<p class="available-stock"><span> More than <?php echo $product['stock']-1; ?> available / <a href="#">8 sold </a></span><p>
 
 					<h4>Short Description:</h4>
 					<p><?php echo $product['description']; ?></p>
 					
-                    <ul>
+					<ul>
 						<li>
 							<div class="form-group quantity-box">
 								<label class="control-label">Quantity</label>
@@ -80,7 +90,7 @@ $product = $data['product'];
 						</div>
 					</div>
 
-					<div class="add-to-btn">
+					<!-- <div class="add-to-btn">
 						<div class="add-comp">
 							<a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
 							<a class="btn hvr-hover" href="#"><i class="fas fa-sync-alt"></i> Add to Compare</a>
@@ -93,10 +103,33 @@ $product = $data['product'];
 							<a class="btn hvr-hover" href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
 							<a class="btn hvr-hover" href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
 						</div>
+					</div> -->
+
+					<div class="add-to-btn d-flex justify-content-between">
+						<div class="add-comp flex-fill d-flex">
+							<?php if (!in_array($product['id'], $wishlistProductIds)) { ?>
+								<form action="/wishlist/add" method="POST">
+                                    <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
+                                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+
+                                    <button class="btn btn-info hvr-hover" id="addtoWishBtn" type="submit" name="addtoWishBtn"><i class="fas fa-heart"></i> Add to wishlist</button>
+                                </form>
+							<?php } ?>
+
+							<a class="btn hvr-hover" href="#"><i class="fas fa-sync-alt"></i> Add to Compare</a>
+						</div>
+
+						<div class="share-bar flex-fill text-right">
+							<a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+							<a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
+							<a class="btn hvr-hover" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+							<a class="btn hvr-hover" href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
+							<a class="btn hvr-hover" href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+						</div>
 					</div>
-                </div>
-            </div>
-        </div>
+				</div>
+			</div>
+		</div>
 		
 		<div class="row my-5">
 			<div class="card card-outline-secondary my-4">
@@ -149,205 +182,205 @@ $product = $data['product'];
 			</div>
 		</div>
 
-        <div class="row my-5">
-            <div class="col-lg-12">
-                <div class="title-all text-center">
-                    <h1>Featured Products</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                </div>
+		<div class="row my-5">
+			<div class="col-lg-12">
+				<div class="title-all text-center">
+					<h1>Featured Products</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+				</div>
 
-                <div class="featured-products-box owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
+				<div class="featured-products-box owl-carousel owl-theme">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a>
-                                        </li>
-                                    </ul>
+								<div class="mask-icon">
+									<ul>
+										<li>
+											<a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a>
+										</li>
+										<li>
+											<a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a>
+										</li>
+										<li>
+											<a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a>
+										</li>
+									</ul>
 
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
 
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
 
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
+								<div class="mask-icon">
+									<ul>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+									</ul>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
 
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
 
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
+								<div class="mask-icon">
+									<ul>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+									</ul>
 
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
 
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
 
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
+								<div class="mask-icon">
+									<ul>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+									</ul>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
 
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
 
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
+								<div class="mask-icon">
+									<ul>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+									</ul>
 
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
 
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
 
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
+								<div class="mask-icon">
+									<ul>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+									</ul>
 
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
 
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
 
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
+								<div class="mask-icon">
+									<ul>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+									</ul>
 
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
 
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
 
-                    <div class="item">
-                        <div class="products-single fix">
-                            <div class="box-img-hover">
-                                <img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
+					<div class="item">
+						<div class="products-single fix">
+							<div class="box-img-hover">
+								<img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-04.jpg" class="img-fluid" alt="Image">
 
-                                <div class="mask-icon">
-                                    <ul>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    </ul>
+								<div class="mask-icon">
+									<ul>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+										<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+									</ul>
 
-                                    <a class="cart" href="#">Add to Cart</a>
-                                </div>
-                            </div>
-                            
-                            <div class="why-text">
-                                <h4>Lorem ipsum dolor sit amet</h4>
-                                <h5> $9.79</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+									<a class="cart" href="#">Add to Cart</a>
+								</div>
+							</div>
+							
+							<div class="why-text">
+								<h4>Lorem ipsum dolor sit amet</h4>
+								<h5> $9.79</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- End Shop Detail Page -->
 

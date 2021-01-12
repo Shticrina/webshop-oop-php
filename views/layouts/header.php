@@ -4,7 +4,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 ?>
 
 <!-- Start Main Top -->
-<div class="main-top">
+<div class="main-top" id="mainBanner">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -111,8 +111,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 							<!-- <li><a href="/shopDetail">Shop Detail</a></li> -->
                             <li><a href="/cart">Cart</a></li>
                             <li><a href="/checkout">Checkout</a></li>
-                            <li><a href="/myAccount">My Account</a></li>
-                            <li><a href="/wishlist">Wishlist</a></li>
+
+                            <?php if ($user && $user['is_connected']) { ?> <!-- if connected -->
+                                <li><a href="/myAccount">My Account</a></li> <!-- user_id -->
+                                <li><a href="/wishlist/all">Wishlist</a></li> <!-- user_id -->
+                            <?php } ?>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>

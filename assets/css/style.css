@@ -144,6 +144,12 @@
 .text-kaki {
     color: #b0b435;
 }
+#addtoWishBtn {
+    padding: 10px 20px;
+    font-weight: 700;
+    margin-right: 3px;
+    border: none;
+}
 /*------------------------------------------------------------------ LOADER -------------------------------------------------------------------*/
  #back-to-top {
      position: fixed;

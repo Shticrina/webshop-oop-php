@@ -35,12 +35,11 @@ class Product {
     }
 
     function searchProducts($input) {
-        $query = "SELECT $this->table_name.name, $this->table_name.description, $this->table_name.price, $this->table_name.image, $this->table_name.stock, $this->table_name.label 
+        $query = "SELECT $this->table_name.id, $this->table_name.name, $this->table_name.slug, $this->table_name.description, $this->table_name.price, $this->table_name.image, $this->table_name.stock, $this->table_name.label 
             FROM $this->table_name 
             JOIN categories 
             ON categories.category_id = $this->table_name.category_id 
             WHERE $this->table_name.name like '%$input%'";
-            // OR categories.category_name like '%$input%'";
       
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -103,4 +102,18 @@ class Product {
 		
 	    return $row;
 	}
+
+    /*function getWishlist($userId) {
+        $query = "SELECT * FROM wishlist 
+            JOIN $this->table_name ON wishlist.product_id = $this->table_name.id
+            WHERE wishlist.user_id = $userId";
+      
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $rows = $result ? $stmt->fetchAll() : [];
+
+        return $rows;
+    }*/
 }

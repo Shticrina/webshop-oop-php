@@ -69,7 +69,7 @@ class UserController extends Controller {
 		                if ($updateUser) {
 		                    $_SESSION['user']['is_connected'] = true;
 		                    $_SESSION['success_message'] = "You are now logged in.";
-
+		                    
 		                    header('location: /');
 		                }
 		            } else {

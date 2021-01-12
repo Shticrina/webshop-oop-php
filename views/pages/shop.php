@@ -2,10 +2,16 @@
 
 if(!isset($_SESSION)){session_start();}
 
+$current_route = $_SERVER['REQUEST_URI'];
 $products = isset($_SESSION['products']) ? $_SESSION['products'] : $data['products'];
 $categories = $data['categories'];
 unset($_SESSION['products']);
-// var_dump($products);
+
+$success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : null;
+unset($_SESSION['success_message']);
+
+$wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishlistProductIds'] : null;
+// var_dump($current_route, $wishlistProductIds, $products);
 ?>
 
 <!-- HTML content -->
@@ -16,6 +22,12 @@ unset($_SESSION['products']);
 <div class="shop-box-inner">
     <div class="container">
         <div class="row">
+            <div class="col-lg-12">
+                <?php if (isset($success_message)) { ?>
+                    <h3 class="text-kaki font-italic mb-2"><?php echo $success_message; ?></h3>
+                <?php } ?>
+            </div>
+
             <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
                 <div class="right-product-box">
                     <div class="product-item-filter row">
@@ -53,6 +65,8 @@ unset($_SESSION['products']);
 
                                     <?php foreach ($products as $product) { ?>
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                            <p>slug: <?php echo $product['slug']; ?></p>
+                                            
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">
                                                     <?php if (isset($product['label'])) { ?>
@@ -66,8 +80,18 @@ unset($_SESSION['products']);
                                                     <div class="mask-icon">
                                                         <ul>
                                                             <li><a href="/product/detail/<?php echo $product['slug']; ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="/wishlist" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+
+                                                            <li>
+                                                                <!-- <a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a> -->
+
+                                                                <form action="/wishlist/add" method="POST">
+                                                                    <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
+                                                                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                                                                    <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
+                                                                </form>
+                                                            </li>
                                                         </ul>
 
                                                         <a class="cart" href="#">Add to Cart</a>
@@ -102,8 +126,12 @@ unset($_SESSION['products']);
                                                         <div class="mask-icon">
                                                             <ul>
                                                                 <li><a href="/product/detail/<?php echo $product['slug']; ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                                <li><a href="/wishlist" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+
+                                                                <li>
+                                                                    <a href="/wishlist/all" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a>
+                                                                </li>
                                                             </ul>
 
                                                         </div>

@@ -44,6 +44,15 @@ class Controller {
 	public function slugify($string) {
 		return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string), '-'));
 	}
+
+	public function getWishlistProductIds() {
+		session_start();
+
+		$userId = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']) ? $_SESSION['user']['user_id'] : null;
+		$wishlist_items = $this->model('Wishlist')->getAllByUser($userId);
+        $ids = array_column($wishlist_items, 'product_id');
+        $_SESSION['wishlistProductIds'] = $ids; // array of product ids for the current user
+	}
 }
 
 ?>

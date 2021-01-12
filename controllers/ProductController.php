@@ -4,6 +4,7 @@ class ProductController extends Controller {
 
 	public function detail($slug) { // slug
 		$product = $this->model('Product')->getProduct($slug);
+		$this->getWishlistProductIds();
 		
 		if ($product) {
 			$this->view('product/show', ['product' => $product]);
@@ -24,8 +25,9 @@ class ProductController extends Controller {
 				$search = filter_var($_POST['search'], FILTER_SANITIZE_STRING); // Sanitization
 				$items = $this->model('Product')->searchProducts($search);
 				$_SESSION['products'] = $items;
+				$this->getWishlistProductIds();
 
-				header('location: /shop');
+				header('location: /shop#mainBanner');
 			}
 		} else {
 			// the user accessed this page without passing by the form => redirect the user to the 404 page
