@@ -1821,7 +1821,7 @@
      padding: 10px 0px;
 }
  .list-group-item[data-toggle="collapse"]::after {
-     width: 0;
+     /*width: 0;
      height: 0;
      position: absolute;
      top: calc(50% - 12px);
@@ -1831,8 +1831,8 @@
      transition: top .2s,-webkit-transform .2s;
      transition: transform .2s,top .2s;
      transition: transform .2s,top .2s,-webkit-transform .2s;
-     font-family: FontAwesome;
-     content: "\f105";
+     font-family: FontAwesome;*/
+     /*content: "\f105";*/
 }
  .list-group-tree .list-group-collapse .list-group {
      margin-left: 25px;

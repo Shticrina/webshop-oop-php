@@ -24,6 +24,7 @@ class OrderItem {
     function getAllByUser($userId) {
         $query = "SELECT * FROM $this->table_name 
             JOIN orders ON $this->table_name.order_id = orders.order_id
+            JOIN products ON $this->table_name.product_id = products.id
             WHERE orders.user_id = $userId";
       
         $stmt = $this->conn->prepare($query);

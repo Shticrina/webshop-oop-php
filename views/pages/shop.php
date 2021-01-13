@@ -103,7 +103,7 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
 
                                                 <div class="why-text">
                                                     <h4><?php echo $product['name']; ?></h4>
-                                                    <h5> $9.79</h5>
+                                                    <h5> $<?php echo $product['price']; ?></h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,7 +185,14 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
 
                             <?php foreach ($categories as $category) { ?>
                                 <div class="list-group-collapse sub-men">
-                                    <a class="list-group-item list-group-item-action" href="#sub-men<?php echo $category['category_id']; ?>" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men<?php echo $category['category_id']; ?>"><?php echo ucfirst($category['category_name']); ?> <small class="text-muted">(<?php echo count($category['products']); ?>)</small></a>
+                                    <a class="list-group-item list-group-item-action d-flex justify-content-between" href="#sub-men<?php echo $category['category_id']; ?>" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men<?php echo $category['category_id']; ?>">
+                                        <div>
+                                            <span><?php echo ucfirst($category['category_name']); ?></span>
+                                            <small class="text-muted">(<?php echo count($category['products']); ?>)</small>
+                                        </div>
+
+                                        <i class="fas fa-angle-down"></i>
+                                    </a>
 
                                     <div class="collapse show" id="sub-men<?php echo $category['category_id']?>" data-parent="#list-group-men">
                                         <div class="list-group">

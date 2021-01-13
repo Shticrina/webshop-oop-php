@@ -1,6 +1,10 @@
 <?php
 
 if(!isset($_SESSION)){session_start();}
+
+$cart_items = isset($_SESSION['cartItems']) ? $_SESSION['cartItems'] : null;
+$cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
+$totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
 ?>
 
 <!-- HTML content -->
@@ -25,74 +29,34 @@ if(!isset($_SESSION)){session_start();}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="thumbnail-img">
-                                    <a href="/product/detail/<?php //echo $product['slug']; ?>">
-        								<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" alt="" />
-        							</a>
-                                </td>
-                                <td class="name-pr">
-                                    <a href="#">Lorem ipsum dolor sit amet</a>
-                                </td>
-                                <td class="price-pr">
-                                    <p>$ 80.0</p>
-                                </td>
-                                <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                <td class="total-pr">
-                                    <p>$ 80.0</p>
-                                </td>
-                                <td class="remove-pr">
-                                    <a href="#">
-        								<i class="fas fa-times"></i>
-        							</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="thumbnail-img">
-                                    <a href="#">
-        								<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" alt="" />
-        							</a>
-                                </td>
-                                <td class="name-pr">
-                                    <a href="#">Lorem ipsum dolor sit amet</a>
-                                </td>
-                                <td class="price-pr">
-                                    <p>$ 60.0</p>
-                                </td>
-                                <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                <td class="total-pr">
-                                    <p>$ 80.0</p>
-                                </td>
-                                <td class="remove-pr">
-                                    <a href="#">
-        								<i class="fas fa-times"></i>
-        							</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="thumbnail-img">
-                                    <a href="#">
-        								<img class="img-fluid" src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" alt="" />
-        							</a>
-                                </td>
-                                <td class="name-pr">
-                                    <a href="#">Lorem ipsum dolor sit amet</a>
-                                </td>
-                                <td class="price-pr">
-                                    <p>$ 30.0</p>
-                                </td>
-                                <td class="quantity-box">
-                                    <input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text">
-                                </td>
-                                <td class="total-pr">
-                                    <p>$ 80.0</p>
-                                </td>
-                                <td class="remove-pr">
-                                    <a href="#">
-        								<i class="fas fa-times"></i>
-        							</a>
-                                </td>
-                            </tr>
+                            <?php if (isset($cartItemsNb) && $cartItemsNb > 0) { ?>
+                                <?php foreach ($cart_items as $item) { ?>
+                                    <tr>
+                                        <td class="thumbnail-img">
+                                            <a href="/product/detail/<?php echo $item['slug']; ?>">
+                								<img class="img-fluid" src="<?php echo APP_ROOT.''.$item['image']; ?>" alt="<?php echo $item['name']; ?>" />
+                							</a>
+                                        </td>
+                                        <td class="name-pr">
+                                            <a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo $item['name']; ?></a>
+                                        </td>
+                                        <td class="price-pr">
+                                            <p>$ <?php echo $item['price']; ?></p>
+                                        </td>
+                                        <td class="quantity-box"><input type="number" size="4" value="<?php echo $item['quantity']; ?>" min="0" max="<?php echo $item['stock']; ?>" step="1" class="c-input-text qty text"></td>
+                                        <td class="total-pr">
+                                            <p>$ <?php echo $item['quantity']*$item['price']; ?></p>
+                                        </td>
+                                        <td class="remove-pr">
+                                            <a href="#">
+                								<i class="fas fa-times"></i>
+                							</a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <tr>No items yet in your cart...</tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -128,7 +92,7 @@ if(!isset($_SESSION)){session_start();}
 
                     <div class="d-flex">
                         <h4>Sub Total</h4>
-                        <div class="ml-auto font-weight-bold"> $ 130 </div>
+                        <div class="ml-auto font-weight-bold"> $ <?php echo $totalPrice; ?> </div>
                     </div>
 
                     <div class="d-flex">

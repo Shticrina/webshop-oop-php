@@ -1,6 +1,12 @@
 <?php
 
 if(!isset($_SESSION)){session_start();}
+
+// Get current user, if connected
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+$cart_items = isset($_SESSION['cartItems']) ? $_SESSION['cartItems'] : null;
+$cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
+$totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
 ?>
 
 <!-- HTML content -->
@@ -10,69 +16,31 @@ if(!isset($_SESSION)){session_start();}
 <!-- Start Checkout Page -->
 <div class="cart-box-main">
     <div class="container">
-        <div class="row new-account-login">
-            <div class="col-sm-6 col-lg-6 mb-3">
-                <div class="title-left">
-                    <h3>Account Login</h3>
-                </div>
-
-                <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Click here to Login</a></h5>
-                
-                <?php include('./views/layouts/loginForm.php'); ?>
-                <!-- <form class="mt-3 collapse review-form-box" id="formLogin">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="InputEmail" class="mb-0">Email Address</label>
-                            <input type="email" class="form-control" id="InputEmail" placeholder="Enter Email">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="InputPassword" class="mb-0">Password</label>
-                            <input type="password" class="form-control" id="InputPassword" placeholder="Password">
-                        </div>
+        <?php if (!$user || !$user['is_connected']) { ?>
+            <div class="row new-account-login">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>Account Login</h3>
                     </div>
 
-                    <button type="submit" class="btn hvr-hover">Login</button>
-                </form> -->
-            </div>
-
-            <div class="col-sm-6 col-lg-6 mb-3">
-                <div class="title-left">
-                    <h3>Create New Account</h3>
+                    <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Click here to Login</a></h5>
+                    
+                    <?php include('./views/layouts/loginForm.php'); ?>
                 </div>
 
-                <h5>
-                    <a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Click here to Register</a>
-                </h5>
-
-                <?php include('./views/layouts/registerForm.php'); ?>
-                <!-- <form class="mt-3 collapse review-form-box" id="formRegister">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="InputName" class="mb-0">First Name</label>
-                            <input type="text" class="form-control" id="InputName" placeholder="First Name">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="InputLastname" class="mb-0">Last Name</label>
-                            <input type="text" class="form-control" id="InputLastname" placeholder="Last Name">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="InputEmail1" class="mb-0">Email Address</label>
-                            <input type="email" class="form-control" id="InputEmail1" placeholder="Enter Email">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="InputPassword1" class="mb-0">Password</label>
-                            <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
-                        </div>
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="title-left">
+                        <h3>Create New Account</h3>
                     </div>
 
-                    <button type="submit" class="btn hvr-hover">Register</button>
-                </form> -->
+                    <h5>
+                        <a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Click here to Register</a>
+                    </h5>
+
+                    <?php include('./views/layouts/registerForm.php'); ?>
+                </div>
             </div>
-        </div>
+        <?php } ?>
 
         <div class="row">
             <div class="col-sm-6 col-lg-6 mb-3">
@@ -263,23 +231,13 @@ if(!isset($_SESSION)){session_start();}
                             </div>
 
                             <div class="rounded p-2 bg-light">
-                                <div class="media mb-2 border-bottom">
-                                    <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                        <div class="small text-muted">Price: $80.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $80.00</div>
+                                <?php foreach ($cart_items as $item) { ?>
+                                    <div class="media mb-2 border-bottom">
+                                        <div class="media-body"> <a href="detail.html"><?php echo ucfirst($item['name']); ?></a>
+                                            <div class="small text-muted">Price: $<?php echo $item['price']; ?> <span class="mx-2">|</span> Qty: <?php echo $item['quantity']; ?> <span class="mx-2">|</span> Subtotal: $<?php echo $item['quantity']*$item['price']; ?></div>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="media mb-2 border-bottom">
-                                    <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                        <div class="small text-muted">Price: $60.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $60.00</div>
-                                    </div>
-                                </div>
-
-                                <div class="media mb-2">
-                                    <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                        <div class="small text-muted">Price: $40.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $40.00</div>
-                                    </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -299,7 +257,7 @@ if(!isset($_SESSION)){session_start();}
 
                             <div class="d-flex">
                                 <h4>Sub Total</h4>
-                                <div class="ml-auto font-weight-bold"> $ 440 </div>
+                                <div class="ml-auto font-weight-bold"> $ <?php echo $totalPrice; ?> </div>
                             </div>
 
                             <div class="d-flex">

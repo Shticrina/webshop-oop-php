@@ -225,6 +225,7 @@ class UserController extends Controller {
 			unset($_SESSION['user']);
 			unset($_SESSION['cartItems']);
 			unset($_SESSION['cartItemsNb']);
+			unset($_SESSION['totalPrice']);
 		}
 	}
 }

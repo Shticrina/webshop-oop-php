@@ -1,8 +1,11 @@
 <?php 
+
 // Get current user, if connected
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+$cart_items = isset($_SESSION['cartItems']) ? $_SESSION['cartItems'] : null;
 $cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
-// var_dump($cartItemsNb);
+$totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
+// var_dump($cart_items);
 ?>
 
 <!-- Start Main Top -->
@@ -107,12 +110,16 @@ $cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null
                     <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
                     <li class="dropdown">
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">SHOP <i class="fas fa-caret-down ml-2"></i></a>
+
                         <ul class="dropdown-menu">
 							<li><a href="/shop">Sidebar Shop</a></li>
 							<!-- <li><a href="/shopDetail">Shop Detail</a></li> -->
                             <li><a href="/cart">Cart</a></li>
-                            <li><a href="/checkout">Checkout</a></li>
+
+                            <?php if (isset($cartItemsNb) && $cartItemsNb > 0) { ?>
+                                <li><a href="/checkout">Checkout</a></li>
+                            <?php } ?>
 
                             <?php if ($user && $user['is_connected']) { ?> <!-- if connected -->
                                 <li><a href="/myAccount">My Account</a></li> <!-- user_id -->
@@ -148,24 +155,21 @@ $cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null
 
             <li class="cart-box">
                 <ul class="cart-list">
-                    <li>
-                        <a href="#" class="photo"><img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Delica omtantur </a></h6>
-                        <p>1x - <span class="price">$80.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Omnes ocurreret</a></h6>
-                        <p>1x - <span class="price">$60.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="<?php echo APP_ROOT; ?>/assets/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Agam facilisis</a></h6>
-                        <p>1x - <span class="price">$40.00</span></p>
-                    </li>
+                    <?php if (isset($cartItemsNb) && $cartItemsNb > 0) { ?>
+                        <?php foreach ($cart_items as $item) { ?>
+                            <li>
+                                <a href="/product/detail/<?php echo $item['slug']; ?>" class="photo"><img src="<?php echo APP_ROOT.''.$item['image']; ?>" class="cart-thumb" alt="" /></a>
+                                <h6><a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo ucfirst($item['name']); ?></a></h6>
+                                <p><?php echo $item['quantity']; ?>x - <span class="price">$<?php echo $item['price']; ?></span></p>
+                            </li>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <li>No items yet in your cart...</li>
+                    <?php } ?>
+
                     <li class="total">
-                        <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                        <span class="float-right"><strong>Total</strong>: $180.00</span>
+                        <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                        <span class="float-right"><strong>Total</strong>: $<?php echo $totalPrice; ?></span>
                     </li>
                 </ul>
             </li>
