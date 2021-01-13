@@ -38,7 +38,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                 							</a>
                                         </td>
                                         <td class="name-pr">
-                                            <a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo $item['name']; ?></a>
+                                            <a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo ucfirst($item['name']); ?></a>
                                         </td>
                                         <td class="price-pr">
                                             <p>$ <?php echo $item['price']; ?></p>
