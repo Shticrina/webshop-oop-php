@@ -22,7 +22,6 @@ unset($_SESSION['success_message']);
                 <?php if (isset($success_message)) { ?>
                     <h3 class="text-kaki font-italic mb-2"><?php echo $success_message; ?></h3>
                 <?php } ?>
-                    <!-- <h3 class="text-kaki font-italic mb-2">Your message</h3> -->
 
                 <div class="table-main table-responsive">
                     <table class="table">
@@ -37,39 +36,41 @@ unset($_SESSION['success_message']);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($wishlist_items)) {
+                            <?php if (count($wishlist_items) > 0) {
                                 foreach ($wishlist_items as $item) { ?>
-                                <tr>
-                                    <td class="thumbnail-img">
-                                        <a href="/product/detail/<?php echo $item['slug']; ?>">
-                                            <img class="img-fluid" src="<?php echo APP_ROOT.''.$item['image']; ?>" alt="" />
-                                        </a>
-                                    </td>
+                                    <tr>
+                                        <td class="thumbnail-img">
+                                            <a href="/product/detail/<?php echo $item['slug']; ?>">
+                                                <img class="img-fluid" src="<?php echo APP_ROOT.''.$item['image']; ?>" alt="" />
+                                            </a>
+                                        </td>
 
-                                    <td class="name-pr">
-                                        <a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo ucfirst($item['name']); ?></a>
-                                    </td>
+                                        <td class="name-pr">
+                                            <a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo ucfirst($item['name']); ?></a>
+                                        </td>
 
-                                    <td class="price-pr">
-                                        <p>$ <?php echo $item['price']; ?></p>
-                                    </td>
+                                        <td class="price-pr">
+                                            <p>$ <?php echo $item['price']; ?></p>
+                                        </td>
 
-                                    <td class="quantity-box"><?php echo $item['stock'] > 0 ? 'In stock' : 'Out of stock'; ?></td>
+                                        <td class="quantity-box"><?php echo $item['stock'] > 0 ? 'In stock' : 'Out of stock'; ?></td>
 
-                                    <td class="add-pr">
-                                        <a class="btn hvr-hover <?php echo $item['stock'] == 0 ? 'disabled' : ''; ?>" href="#" >Add to Cart</a>
-                                    </td>
+                                        <td class="add-pr">
+                                            <a class="btn hvr-hover <?php echo $item['stock'] == 0 ? 'disabled' : ''; ?>" href="#" >Add to Cart</a>
+                                        </td>
 
-                                    <td class="remove-pr">
-                                        <!-- <a href="#"><i class="fas fa-times"></i></a> -->
-                                        <form action="/wishlist/delete" method="POST" id="deleteWishItemForm">
-                                            <input type="hidden" name="wishlist_id" value="<?php echo $item['wishlist_id']; ?>">
-                                            <button type="submit" name="deletewishBtn" class="btn btn-link text-dark"><i class="fas fa-times"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                        <td class="remove-pr">
+                                            <!-- <a href="#"><i class="fas fa-times"></i></a> -->
+                                            <form action="/wishlist/delete" method="POST" id="deleteWishItemForm">
+                                                <input type="hidden" name="wishlist_id" value="<?php echo $item['wishlist_id']; ?>">
+                                                <button type="submit" name="deletewishBtn" class="btn btn-link text-dark"><i class="fas fa-times"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <h3 class="text-kaki font-italic mt-2">You don't have items yet in your wishlist...</h3>
                             <?php } ?>
-                        <?php } ?>
                         </tbody>
                     </table>
                 </div>

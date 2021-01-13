@@ -224,6 +224,8 @@ class UserController extends Controller {
 			// Delete session user
 			// session_destroy();
 			unset($_SESSION['user']);
+			unset($_SESSION['cartItems']);
+			unset($_SESSION['cartItemsNb']);
 		}
 	}
 }

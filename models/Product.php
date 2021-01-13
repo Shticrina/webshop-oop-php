@@ -51,7 +51,10 @@ class Product {
     }
 
     function getProductsByCat($catId) {
-        $query = "SELECT $this->table_name.name, $this->table_name.slug, $this->table_name.description, $this->table_name.price, $this->table_name.stock, $this->table_name.label FROM $this->table_name JOIN categories ON categories.category_id = $this->table_name.category_id WHERE $this->table_name.category_id = $catId";
+        $query = "SELECT $this->table_name.name, $this->table_name.slug, $this->table_name.description, $this->table_name.price, $this->table_name.stock, $this->table_name.label
+            FROM $this->table_name
+            JOIN categories ON categories.category_id = $this->table_name.category_id
+            WHERE $this->table_name.category_id = $catId";
       
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

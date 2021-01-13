@@ -1,6 +1,8 @@
 <?php 
 // Get current user, if connected
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+$cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
+// var_dump($cartItemsNb);
 ?>
 
 <!-- Start Main Top -->
@@ -131,7 +133,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
                     <li class="side-menu">
 						<a href="#">
 							<i class="fa fa-shopping-bag"></i>
-							<span class="badge">3</span>
+							<span class="badge"><?php echo isset($cartItemsNb) ? $cartItemsNb : '0'; ?></span>
 							<p>My Cart</p>
 						</a>
 					</li>

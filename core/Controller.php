@@ -46,12 +46,30 @@ class Controller {
 	}
 
 	public function getWishlistProductIds() {
-		session_start();
-
+		if(!isset($_SESSION)){session_start();}
 		$userId = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']) ? $_SESSION['user']['user_id'] : null;
-		$wishlist_items = $this->model('Wishlist')->getAllByUser($userId);
-        $ids = array_column($wishlist_items, 'product_id');
-        $_SESSION['wishlistProductIds'] = $ids; // array of product ids for the current user
+		
+		if ($userId) {
+			$wishlist_items = $this->model('Wishlist')->getAllByUser($userId);
+	        $ids = array_column($wishlist_items, 'product_id');
+	        $_SESSION['wishlistProductIds'] = $ids; // array of product ids for the current user
+	    }
+	}
+
+	public function getShoppingCartItems() {
+		if(!isset($_SESSION)){session_start();}
+		$userId = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']) ? $_SESSION['user']['user_id'] : null;
+
+		if ($userId) {
+			$cart_items = $this->model('OrderItem')->getAllByUser($userId);
+			$nb_items = array_reduce($cart_items, function(&$res, $item) { 
+				$res += $item['quantity']; 
+				return $res;
+			}, 0);
+
+        	$_SESSION['cartItems'] = $cart_items;
+        	$_SESSION['cartItemsNb'] = $nb_items;
+		}
 	}
 }
 

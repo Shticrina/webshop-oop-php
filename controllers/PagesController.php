@@ -6,10 +6,12 @@ class PagesController extends Controller {
 		$categories = $this->model('Category')->getAllCategories();
   		$products = $this->model('Product')->getAllProducts();
 
+  		$this->getShoppingCartItems();
 	    $this->view('welcome', ['categories' => $categories, 'products' => $products]);
   	}
   	
 	public function about() {
+		$this->getShoppingCartItems();
 		$this->view('pages/about');
 	}
 
@@ -18,6 +20,7 @@ class PagesController extends Controller {
 		$products = $this->model('Product')->getAllProducts();
 
 	    $this->getWishlistProductIds();
+	    $this->getShoppingCartItems();
 	    $this->view('pages/gallery', ['categories' => $categories, 'products' => $products]);
 	}
 
@@ -34,52 +37,47 @@ class PagesController extends Controller {
 		}
 
 	    $this->getWishlistProductIds();
+	    $this->getShoppingCartItems();
 	    $this->view('pages/shop', ['categories' => $completeCategories, 'products' => $products]);
 	}
 
-	public function shopDetail() {
+	/*public function shopDetail() {
 		$this->getWishlistProductIds();
 		$this->view('pages/shop-detail');
-	}
+	}*/
 
 	public function cart() {
+		$this->getShoppingCartItems();
 		$this->view('pages/cart');
 	}
 
 	public function checkout() {
+		$this->getShoppingCartItems();
 		$this->view('pages/checkout');
 	}
 
 	public function contactUs() {
+		$this->getShoppingCartItems();
 		$this->view('pages/contact-us');
 	}
 
 	public function myAccount() {
+		$this->getShoppingCartItems();
 		$this->view('pages/my-account');
 	}
 
-	/*public function wishlist() {
-		session_start();
-		$user_id = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']) ? $_SESSION['user']['user_id'] : null;
-		var_dump($user_id); die();
-		
-		if ($user_id) {
-			$wishlist_items = $this->model('Product')->getProductsByUserId($user_id);
-			$this->view('pages/wishlist', ['items' => $wishlist_items]);
-		} else {
-  			$this->view('404');
-		}
-	}*/
-
 	public function register() {
+		$this->getShoppingCartItems();
 		$this->view('auth/register');
 	}
 
 	public function login() {
+		$this->getShoppingCartItems();
 		$this->view('auth/login');
 	}
 
 	public function notFound() {
+		$this->getShoppingCartItems();
   		$this->view('404');
   	}
 }
