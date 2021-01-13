@@ -29,26 +29,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<!-- <div class="login-box">koooo
-					<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-						<option><a href="/register">Register Here</a></option>
-						<option><a href="/login">Sign In</a></option>
-					</select>
-				</div> -->
-
-                <?php if ($user && $user['is_connected']) { ?> <!-- if connected -->
-                    <div class="login-box w-50 text-right">
-                        <a class="text-light mr-3" href="/myAccount">Hello <span class="text-capitalize"><?php echo $user['first_name']; ?></span>!</a>
-                        <a class="text-kaki" href="/user/logout"><i class="fa fa-sign-in fa-1x" aria-hidden="true"></i>&nbsp; Sign out</a>
-                    </div>
-                <?php } else { ?> <!-- if not connected -->
-                    <div class="login-box w-50 text-right">
-                        <a class="text-light mr-3" href="/login">Sign in</a>
-                        <a class="text-kaki" href="/register">Sign up</a>
-                    </div>
-                <?php } ?>
-
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-flex justify-content-between">
                 <div class="text-slid-box">
                     <div id="offer-box" class="carouselTicker">
                         <ul class="offer-box">
@@ -79,6 +60,25 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
                         </ul>
                     </div>
                 </div>
+
+				<!-- <div class="login-box">koooo
+					<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
+						<option><a href="/register">Register Here</a></option>
+						<option><a href="/login">Sign In</a></option>
+					</select>
+				</div> -->
+
+                <?php if ($user && $user['is_connected']) { ?> <!-- if connected -->
+                    <div class="text-right">
+                        <a class="text-light mr-3" href="/myAccount">Hello <span class="text-capitalize"><?php echo $user['first_name']; ?></span>!</a>
+                        <a class="text-kaki" href="/user/logout"><i class="fa fa-sign-in fa-1x" aria-hidden="true"></i>&nbsp; Sign out</a>
+                    </div>
+                <?php } else { ?> <!-- if not connected -->
+                    <div class="text-right">
+                        <a class="text-light mr-3" href="/login">Sign in</a>
+                        <a class="text-kaki" href="/register">Sign up</a>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>

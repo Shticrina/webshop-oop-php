@@ -4,6 +4,11 @@ if(!isset($_SESSION)){session_start();}
 
 $products = $data['products'];
 $categories = $data['categories'];
+$current_route = $_SERVER['REQUEST_URI'];
+$wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishlistProductIds'] : null;
+
+$success_message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : null;
+unset($_SESSION['success_message']);
 ?>
 
 <!-- HTML content -->
@@ -11,7 +16,7 @@ $categories = $data['categories'];
 <?php include('./views/layouts/header.php'); ?>
 
 <!-- Start Gallery Page -->
-<div class="products-box">
+<div class="products-box" id="galleryContent">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -24,7 +29,7 @@ $categories = $data['categories'];
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="special-menu text-center">
+                <div class="<?php echo isset($success_message) ? 'mb-4' : 'special-menu'; ?> text-center">
                     <div class="button-group filter-button-group">
                         <button class="active" data-filter="*">All</button>
                         
@@ -34,6 +39,12 @@ $categories = $data['categories'];
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-12">
+                <?php if (isset($success_message)) { ?>
+                    <h3 class="text-kaki font-italic mb-1"><?php echo $success_message; ?></h3>
+                <?php } ?>
+            </div> 
         </div>
 
         <div class="row special-list">
@@ -49,9 +60,19 @@ $categories = $data['categories'];
                             
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="/product/detail/<?php echo $product['slug']; ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    <li>
+                                        <!-- <a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a> -->
+
+                                        <form action="<?php echo !in_array($product['id'], $wishlistProductIds) ? '/wishlist/add' : '#galleryContent'; ?>" method="POST">
+                                            <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
+                                            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+
+                                            <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="<?php echo in_array($product['id'], $wishlistProductIds) ? 'Already in your Wishlist' : 'Add to Wishlist'; ?>"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
+                                        </form>
+                                    </li>
                                 </ul>
                                 <a class="cart" href="#">Add to Cart</a>
                             </div>

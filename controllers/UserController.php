@@ -55,7 +55,6 @@ class UserController extends Controller {
 
 			if (count($data['errors']) == 0) {
 		        $currentUser = $this->userModel->getUserByEmail($data['values']['email']); // array OR false
-		        // var_dump($currentUser);
 
 		        // check if the user email exists in the db & if password match
 		        if ($currentUser != false) {
@@ -64,7 +63,6 @@ class UserController extends Controller {
 
 		                // update user in the db: is_connected = true
 		                $updateUser = $this->userModel->updateUserByConnection($currentUser['user_id'], true); // true or false
-		                // var_dump($updateUser); // false
 
 		                if ($updateUser) {
 		                    $_SESSION['user']['is_connected'] = true;

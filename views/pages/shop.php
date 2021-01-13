@@ -64,9 +64,7 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
                                 <div class="row">
 
                                     <?php foreach ($products as $product) { ?>
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <p>slug: <?php echo $product['slug']; ?></p>
-                                            
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">                         
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">
                                                     <?php if (isset($product['label'])) { ?>
@@ -86,10 +84,11 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
                                                             <li>
                                                                 <!-- <a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a> -->
 
-                                                                <form action="/wishlist/add" method="POST">
+                                                                <form action="<?php echo !in_array($product['id'], $wishlistProductIds) ? '/wishlist/add' : ''; ?>" method="POST">
                                                                     <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
                                                                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                                                                    <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
+
+                                                                    <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="<?php echo in_array($product['id'], $wishlistProductIds) ? 'Already in your Wishlist' : 'Add to Wishlist'; ?>"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
                                                                 </form>
                                                             </li>
                                                         </ul>
@@ -130,10 +129,16 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
 
                                                                 <li>
-                                                                    <a href="/wishlist/all" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a>
+                                                                    <!-- <a href="/wishlist/all" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a> -->
+
+                                                                    <form action="<?php echo !in_array($product['id'], $wishlistProductIds) ? '/wishlist/add' : ''; ?>" method="POST">
+                                                                        <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
+                                                                        <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+
+                                                                        <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="<?php echo in_array($product['id'], $wishlistProductIds) ? 'Already in your Wishlist' : 'Add to Wishlist'; ?>"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
+                                                                    </form>
                                                                 </li>
                                                             </ul>
-
                                                         </div>
                                                     </div>
                                                 </div>
