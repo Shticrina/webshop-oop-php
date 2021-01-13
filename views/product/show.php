@@ -2,6 +2,8 @@
 
 if(!isset($_SESSION)){session_start();}
 
+// Get current user, if connected
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $product = $data['product'];
 $current_route = $_SERVER['REQUEST_URI'];
 $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishlistProductIds'] : null;
@@ -107,7 +109,7 @@ unset($_SESSION['success_message']);
 
 					<div class="add-to-btn d-flex justify-content-between">
 						<div class="add-comp flex-fill d-flex">
-							<?php if (!in_array($product['id'], $wishlistProductIds)) { ?>
+							<?php if (!in_array($product['id'], $wishlistProductIds) && $user) { ?>
 								<form action="/wishlist/add" method="POST">
                                     <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
                                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">

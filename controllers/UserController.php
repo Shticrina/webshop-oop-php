@@ -210,7 +210,6 @@ class UserController extends Controller {
 		session_start();
 
 		$userId = isset($_SESSION['user']) ? $_SESSION['user']['user_id'] : null;
-		// var_dump($userId);
 
 		// update user in the db: is_connected = false
 		$updateUser = isset($userId) ? $this->userModel->updateUserByConnection($userId, 0) : false;

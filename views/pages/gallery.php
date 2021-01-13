@@ -2,6 +2,8 @@
 
 if(!isset($_SESSION)){session_start();}
 
+// Get current user, if connected
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $products = $data['products'];
 $categories = $data['categories'];
 $current_route = $_SERVER['REQUEST_URI'];
@@ -63,6 +65,8 @@ unset($_SESSION['success_message']);
                                     <li><a href="/product/detail/<?php echo $product['slug']; ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
 
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+
+                                    <?php if ($user) { ?>
                                     <li>
                                         <!-- <a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a> -->
 
@@ -73,6 +77,7 @@ unset($_SESSION['success_message']);
                                             <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="<?php echo in_array($product['id'], $wishlistProductIds) ? 'Already in your Wishlist' : 'Add to Wishlist'; ?>"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
                                         </form>
                                     </li>
+                                    <?php } ?>
                                 </ul>
                                 <a class="cart" href="#">Add to Cart</a>
                             </div>

@@ -2,6 +2,8 @@
 
 if(!isset($_SESSION)){session_start();}
 
+// Get current user, if connected
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $current_route = $_SERVER['REQUEST_URI'];
 $products = isset($_SESSION['products']) ? $_SESSION['products'] : $data['products'];
 $categories = $data['categories'];
@@ -81,6 +83,7 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
 
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
 
+                                                            <?php if ($user) { ?>
                                                             <li>
                                                                 <!-- <a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a> -->
 
@@ -91,6 +94,7 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
                                                                     <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="<?php echo in_array($product['id'], $wishlistProductIds) ? 'Already in your Wishlist' : 'Add to Wishlist'; ?>"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
                                                                 </form>
                                                             </li>
+                                                            <?php } ?>
                                                         </ul>
 
                                                         <a class="cart" href="#">Add to Cart</a>
@@ -128,6 +132,7 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
 
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
 
+                                                                <?php if ($user) { ?>
                                                                 <li>
                                                                     <!-- <a href="/wishlist/all" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a> -->
 
@@ -138,6 +143,7 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
                                                                         <button class="btn btn-link pl-2" type="submit" name="addtoWishBtn" data-toggle="tooltip" data-placement="right" title="<?php echo in_array($product['id'], $wishlistProductIds) ? 'Already in your Wishlist' : 'Add to Wishlist'; ?>"><i class="<?php echo in_array($product['id'], $wishlistProductIds) ? 'fas' : 'far'; ?> fa-heart text-white"></i></button>
                                                                     </form>
                                                                 </li>
+                                                            <?php } ?>
                                                             </ul>
                                                         </div>
                                                     </div>
