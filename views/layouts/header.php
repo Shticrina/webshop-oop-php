@@ -122,8 +122,8 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                             <?php } ?>
 
                             <?php if ($user && $user['is_connected']) { ?> <!-- if connected -->
-                                <li><a href="/myAccount">My Account</a></li> <!-- user_id -->
-                                <li><a href="/wishlist/all">Wishlist</a></li> <!-- user_id -->
+                                <li><a href="/myAccount">My Account</a></li>
+                                <li><a href="/wishlist/all">Wishlist</a></li>
                             <?php } ?>
                         </ul>
                     </li>
@@ -140,7 +140,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                     <li class="side-menu">
 						<a href="#">
 							<i class="fa fa-shopping-bag"></i>
-							<span class="badge"><?php echo isset($cartItemsNb) ? $cartItemsNb : '0'; ?></span>
+							<span class="badge" id="cartBadge"><?php echo isset($cartItemsNb) ? $cartItemsNb : '0'; ?></span>
 							<p>My Cart</p>
 						</a>
 					</li>
@@ -157,19 +157,19 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                 <ul class="cart-list">
                     <?php if (isset($cartItemsNb) && $cartItemsNb > 0) { ?>
                         <?php foreach ($cart_items as $item) { ?>
-                            <li>
+                            <li id="sideCart<?php echo $item['id']; ?>">
                                 <a href="/product/detail/<?php echo $item['slug']; ?>" class="photo"><img src="<?php echo APP_ROOT.''.$item['image']; ?>" class="cart-thumb" alt="" /></a>
                                 <h6><a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo ucfirst($item['name']); ?></a></h6>
                                 <p><?php echo $item['quantity']; ?>x - <span class="price">$<?php echo $item['price']; ?></span></p>
                             </li>
                         <?php } ?>
                     <?php } else { ?>
-                        <li>No items yet in your cart...</li>
+                        <li>No items yet in your Shopping Cart...</li>
                     <?php } ?>
 
                     <li class="total">
-                        <a href="/cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                        <span class="float-right"><strong>Total</strong>: $<?php echo $totalPrice; ?></span>
+                        <a href="/cart" class="btn btn-default hvr-hover btn-cart <?php echo !$cartItemsNb || $cartItemsNb == 0 ? 'disabled' : ''; ?>">VIEW CART</a>
+                        <span class="float-right"><strong>Total: </strong> $<span id="headerTotalPrice"><?php echo $totalPrice; ?></span></span>
                     </li>
                 </ul>
             </li>

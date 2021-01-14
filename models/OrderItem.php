@@ -22,7 +22,7 @@ class OrderItem {
     }
   
     function getAllByUser($userId) {
-        $query = "SELECT * FROM $this->table_name 
+        $query = "SELECT $this->table_name.id, $this->table_name.order_id, $this->table_name.product_id, $this->table_name.price, $this->table_name.quantity, $this->table_name.image, products.name, products.slug, products.stock, orders.total_price FROM $this->table_name
             JOIN orders ON $this->table_name.order_id = orders.order_id
             JOIN products ON $this->table_name.product_id = products.id
             WHERE orders.user_id = $userId";
@@ -36,19 +36,31 @@ class OrderItem {
         return $rows;
     }
 
-    /*function create($productId, $userId) {
+    function getById($id) {
+        $request = "SELECT * FROM $this->table_name WHERE id = $id";
+
+        $stmt = $this->conn->prepare($request); // prepare the request in a statement
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $result ? $stmt->fetch() : null;
+
+        return $row;
+    }
+
+    function create($productId, $userId) {
         $request = "INSERT INTO $this->table_name (user_id, product_id) VALUES ('$userId', '$productId')";
 
         $stmt = $this->conn->prepare($request); // prepare the request in a statement
         $stmt->execute();
     }
 
-    function delete($userId) {
-        $query = "DELETE FROM $this->table_name WHERE wishlist_id = $userId";
-      
+    function delete($id) {
+        $query = "DELETE FROM $this->table_name WHERE id = $id";
+
         // use exec() because no results are returned
         $this->conn->exec($query);
-    }*/
+    }
 }
 
 ?>

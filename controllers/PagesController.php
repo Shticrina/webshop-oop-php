@@ -46,10 +46,10 @@ class PagesController extends Controller {
 		$this->view('pages/shop-detail');
 	}*/
 
-	public function cart() {
+	/*public function cart() {
 		$this->getShoppingCartItems();
 		$this->view('pages/cart');
-	}
+	}*/
 
 	public function checkout() {
 		$this->getShoppingCartItems();
