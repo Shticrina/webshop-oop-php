@@ -69,7 +69,7 @@ class Controller {
 
         	$_SESSION['cartItems'] = $cart_items;
         	$_SESSION['cartItemsNb'] = $nb_items;
-        	$_SESSION['totalPrice'] = $cart_items[0]['total_price'];
+        	$_SESSION['totalPrice'] = isset($cart_items) && isset($cart_items[0]['total_price']) ? $cart_items[0]['total_price'] : 0;
 		}
 	}
 }

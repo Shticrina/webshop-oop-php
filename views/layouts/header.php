@@ -154,13 +154,14 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
 
             <li class="cart-box">
-                <ul class="cart-list">
+                <ul class="cart-list" id="cart-list-header">
                     <?php if (isset($cartItemsNb) && $cartItemsNb > 0) { ?>
                         <?php foreach ($cart_items as $item) { ?>
-                            <li id="sideCart<?php echo $item['id']; ?>">
+                            <li id="sideCart<?php echo $item['id']; ?>" class="cart-item-header">
                                 <a href="/product/detail/<?php echo $item['slug']; ?>" class="photo"><img src="<?php echo APP_ROOT.''.$item['image']; ?>" class="cart-thumb" alt="" /></a>
                                 <h6><a href="/product/detail/<?php echo $item['slug']; ?>"><?php echo ucfirst($item['name']); ?></a></h6>
-                                <p><?php echo $item['quantity']; ?>x - <span class="price">$<?php echo $item['price']; ?></span></p>
+                                <p>
+                                    <span id="itemQty<?php echo $item['id']; ?>"><?php echo $item['quantity']; ?></span>x - <span class="price">$<?php echo $item['price']; ?></span></p>
                             </li>
                         <?php } ?>
                     <?php } else { ?>
@@ -168,7 +169,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                     <?php } ?>
 
                     <li class="total">
-                        <a href="/cart" class="btn btn-default hvr-hover btn-cart <?php echo !$cartItemsNb || $cartItemsNb == 0 ? 'disabled' : ''; ?>">VIEW CART</a>
+                        <a href="/cart" id="viewCartBtnHeader" class="btn btn-default hvr-hover btn-cart <?php echo !$cartItemsNb || $cartItemsNb == 0 ? 'disabled' : ''; ?>">VIEW CART</a>
                         <span class="float-right"><strong>Total: </strong> $<span id="headerTotalPrice"><?php echo $totalPrice; ?></span></span>
                     </li>
                 </ul>

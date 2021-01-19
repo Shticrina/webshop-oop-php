@@ -36,14 +36,38 @@ class OrderItem {
         return $rows;
     }
 
+    function getAll($orderId) {
+        $query = "SELECT * FROM $this->table_name WHERE order_id = $orderId";
+      
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $rows = $result ? $stmt->fetchAll() : [];
+
+        return $rows;
+    }
+
     function getById($id) {
-        $request = "SELECT * FROM $this->table_name WHERE id = $id";
+        $request = "SELECT * FROM $this->table_name 
+        JOIN orders ON $this->table_name.order_id = orders.order_id
+        WHERE id = $id";
 
         $stmt = $this->conn->prepare($request); // prepare the request in a statement
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $row = $result ? $stmt->fetch() : null;
+
+        return $row;
+    }
+
+    function updateQty($id, $qty) {
+        $request = "UPDATE $this->table_name SET `quantity` = $qty WHERE `id` = $id";
+
+        $stmt = $this->conn->prepare($request); // prepare the request in a statement
+        $stmt->execute(); // execute the statement
+        $row = $stmt->rowCount() > 0 ? true : false;
 
         return $row;
     }
