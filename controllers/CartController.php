@@ -3,7 +3,7 @@
 class CartController extends Controller {
 
   	public function home() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
 		$this->view('pages/cart');
 	}
 
@@ -26,8 +26,10 @@ class CartController extends Controller {
 
 			if (!$order) {
 				// create first order
-				$order = $this->model('Order')->create($user_id, $user_session, $connected);
+				$this->model('Order')->create($user_id, $user_session, $connected);
+				$order = $this->model('Order')->getCurrentOrder($connected, $user_id);
 			}
+			// var_dump($order); // false
 
   			if ($order) {
   				// verify if order item already exists in the db
@@ -110,6 +112,8 @@ class CartController extends Controller {
   	}
 
   	public function deleteItem() {
+  		session_start();
+
 		$itemId = isset($_POST['id']) ? $_POST['id'] : null;
 		$noItems = 0;
 
@@ -117,6 +121,7 @@ class CartController extends Controller {
 			// get $item object from the db
 			$item = $this->model('OrderItem')->getById($itemId);
 			$order_id = $item['order_id'];
+			// var_dump($itemId, $item);
 
 			// delete from the database
 			$this->model('OrderItem')->delete($itemId);
@@ -129,6 +134,10 @@ class CartController extends Controller {
 				$this->model('Order')->updateTotalPrice($newPrice, $item['order_id']);
 			} else {
 				$noItems = 1;
+
+				unset($_SESSION['cartItems']);
+				unset($_SESSION['cartItemsNb']);
+				unset($_SESSION['totalPrice']);
 
 				// delete order
 				$this->model('Order')->delete($order_id);

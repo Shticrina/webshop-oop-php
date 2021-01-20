@@ -38,6 +38,7 @@ class OrderItem {
 
     function getAll($orderId) {
         $query = "SELECT * FROM $this->table_name WHERE order_id = $orderId";
+        // var_dump($query, $orderId);
       
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

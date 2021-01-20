@@ -66,7 +66,7 @@ class Controller {
 
         if ($userId) {
 	    	$cart = $this->model('Order')->getCurrentOrder($connected, $userId); // array or false
-        	// var_dump($cart);
+        	// var_dump($connected, $userId, $cart);
 
 			if ($cart != false) {
 				$cart_items = $this->model('OrderItem')->getAllByUserAndOrder($userId, $cart['order_id']);
@@ -82,31 +82,6 @@ class Controller {
         $_SESSION['cartItems'] = $cart_items;
     	$_SESSION['cartItemsNb'] = $nb_items;
     }
-
-	public function getShoppingCartItems() {
-		if(!isset($_SESSION)){session_start();}
-
-		$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-		$connected = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']);
-        // var_dump($connected); // true
-
-		if ($userId) {
-			$cart = $this->model('Order')->getCurrentOrder($connected, $userId); // array or false
-        	// var_dump($cart); // false when connected
-
-			if ($cart) {
-				$cart_items = $this->model('OrderItem')->getAllByUserAndOrder($userId, $cart['order_id']);
-				$nb_items = array_reduce($cart_items, function(&$res, $item) { 
-					$res += $item['quantity']; 
-					return $res;
-				}, 0);
-
-	        	$_SESSION['cartItems'] = $cart_items;
-	        	$_SESSION['cartItemsNb'] = $nb_items;
-	        	$_SESSION['totalPrice'] = isset($cart_items) && isset($cart_items[0]['total_price']) ? $cart_items[0]['total_price'] : 0;
-	        }
-		}
-	}
 }
 
 ?>

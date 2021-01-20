@@ -11,6 +11,11 @@ class UserController extends Controller {
 		$data = [];
 		session_start();
 
+		unset($_SESSION['user']);
+		unset($_SESSION['cartItems']);
+		unset($_SESSION['cartItemsNb']);
+		unset($_SESSION['totalPrice']);
+
 		if (isset($_POST['registerBtn'])) {
 			$validation = $this->validationRegister($_POST);
 

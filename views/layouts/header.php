@@ -5,7 +5,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $cart_items = isset($_SESSION['cartItems']) ? $_SESSION['cartItems'] : null;
 $cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
 $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
-// var_dump(session_id());
+// var_dump($totalPrice);
 ?>
 
 <!-- Start Main Top -->
@@ -165,7 +165,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                             </li>
                         <?php } ?>
                     <?php } else { ?>
-                        <li>No items yet in your Shopping Cart...</li>
+                        <li class="no-items">No items yet in your Shopping Cart...</li>
                     <?php } ?>
 
                     <li class="total">

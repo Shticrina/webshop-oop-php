@@ -281,7 +281,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
             $("#viewCartBtnHeader").addClass("disabled");
 
             // add message with empty cart in header sidebar cart
-            $("#cart-list-header").prepend("<li>No items yet in your Shopping Cart...</li>");
+            $("#cart-list-header").prepend("<li class='no-items'>No items yet in your Shopping Cart...</li>");
 
             // add message with empty cart in the page content
             var $noItemsMessage = $('<div class="d-flex justify-content-center" id="noItemsMessage"></div>');

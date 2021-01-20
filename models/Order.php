@@ -29,8 +29,9 @@ class Order {
         $sessionID = session_id();
 
         if ($connected) {
-            // $request = "SELECT * FROM $this->table_name WHERE user_session IS NULL AND user_id = '$user_id' AND payment_status = 'false'";
-            $request = "SELECT * FROM $this->table_name WHERE user_session = 'NULL' AND user_id = '$user_id' AND payment_status = 'false'";
+            // user_session IS NULL AND 
+            $request = "SELECT * FROM $this->table_name WHERE user_id = '$user_id' AND payment_status = 'false'";
+            // $request = "SELECT * FROM $this->table_name WHERE user_session = 'NULL' AND user_id = '$user_id' AND payment_status = 'false'";
         } else {
             $request = "SELECT * FROM $this->table_name WHERE user_session = '$sessionID' AND user_id = '$user_id' AND payment_status = 'false'";
         }
