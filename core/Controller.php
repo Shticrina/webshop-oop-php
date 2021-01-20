@@ -56,20 +56,55 @@ class Controller {
 	    }
 	}
 
+	public function currentShoppingCart() {
+		if(!isset($_SESSION)){session_start();}
+
+        $cart_items = [];
+        $nb_items = 0;
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+        $connected = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']);
+
+        if ($userId) {
+	    	$cart = $this->model('Order')->getCurrentOrder($connected, $userId); // array or false
+        	// var_dump($cart);
+
+			if ($cart != false) {
+				$cart_items = $this->model('OrderItem')->getAllByUserAndOrder($userId, $cart['order_id']);
+				$nb_items = array_reduce($cart_items, function(&$res, $item) { 
+					$res += $item['quantity']; 
+					return $res;
+				}, 0);
+
+		    	$_SESSION['totalPrice'] = isset($cart_items) && isset($cart_items[0]['total_price']) ? $cart_items[0]['total_price'] : 0;
+			}
+		}
+
+        $_SESSION['cartItems'] = $cart_items;
+    	$_SESSION['cartItemsNb'] = $nb_items;
+    }
+
 	public function getShoppingCartItems() {
 		if(!isset($_SESSION)){session_start();}
-		$userId = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']) ? $_SESSION['user']['user_id'] : null;
+
+		$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+		$connected = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']);
+        // var_dump($connected); // true
 
 		if ($userId) {
-			$cart_items = $this->model('OrderItem')->getAllByUser($userId);
-			$nb_items = array_reduce($cart_items, function(&$res, $item) { 
-				$res += $item['quantity']; 
-				return $res;
-			}, 0);
+			$cart = $this->model('Order')->getCurrentOrder($connected, $userId); // array or false
+        	// var_dump($cart); // false when connected
 
-        	$_SESSION['cartItems'] = $cart_items;
-        	$_SESSION['cartItemsNb'] = $nb_items;
-        	$_SESSION['totalPrice'] = isset($cart_items) && isset($cart_items[0]['total_price']) ? $cart_items[0]['total_price'] : 0;
+			if ($cart) {
+				$cart_items = $this->model('OrderItem')->getAllByUserAndOrder($userId, $cart['order_id']);
+				$nb_items = array_reduce($cart_items, function(&$res, $item) { 
+					$res += $item['quantity']; 
+					return $res;
+				}, 0);
+
+	        	$_SESSION['cartItems'] = $cart_items;
+	        	$_SESSION['cartItemsNb'] = $nb_items;
+	        	$_SESSION['totalPrice'] = isset($cart_items) && isset($cart_items[0]['total_price']) ? $cart_items[0]['total_price'] : 0;
+	        }
 		}
 	}
 }

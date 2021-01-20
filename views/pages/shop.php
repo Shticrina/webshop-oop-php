@@ -97,7 +97,7 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
                                                             <?php } ?>
                                                         </ul>
 
-                                                        <a class="cart" href="#">Add to Cart</a>
+                                                        <a class="cart" id="addToCartBtn<?php echo $product['id']; ?>" href="javascript:void(0)" data-price="<?php echo $product['price']; ?>" data-quantity="1" data-image="<?php echo $product['image']; ?>" onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</a>
                                                     </div>
                                                 </div>
 
@@ -155,7 +155,8 @@ $wishlistProductIds = isset($_SESSION['wishlistProductIds']) ? $_SESSION['wishli
                                                     <h4><?php echo $product['name']; ?></h4>
                                                     <h5> <del>$ <?php echo $product['price']*1.03; ?></del> $<?php echo $product['price']; ?></h5>
                                                     <p><?php echo $product['description']; ?>... Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante. Integer vitae suscipit nisi. Morbi dignissim risus sit amet orci porta, eget aliquam purus sollicitudin. Cras eu metus felis.</p>
-                                                    <a class="btn hvr-hover" href="#">Add to Cart</a>
+
+                                                    <a class="btn hvr-hover" id="addToCartBtn<?php echo $product['id']; ?>" href="javascript:void(0)" data-price="<?php echo $product['price']; ?>" data-quantity="1" data-image="<?php echo $product['image']; ?>" onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</a>
                                                 </div>
                                             </div>
                                         </div>

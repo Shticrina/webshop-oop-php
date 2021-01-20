@@ -5,7 +5,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 $cart_items = isset($_SESSION['cartItems']) ? $_SESSION['cartItems'] : null;
 $cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
 $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
-// var_dump($cart_items);
+// var_dump(session_id());
 ?>
 
 <!-- Start Main Top -->

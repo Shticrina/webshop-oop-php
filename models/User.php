@@ -62,7 +62,9 @@ class User {
 	}
 
     function updateUserByConnection($id, $is_connected) {
-        $request = "UPDATE $this->table_name SET `is_connected` = $is_connected WHERE `user_id` = $id";
+        // $connected = $is_connected ? 'true' : 'false';
+        $request = "UPDATE $this->table_name SET `is_connected` = '$is_connected' WHERE `user_id` = $id";
+        // var_dump($is_connected, $request);
 
         $stmt = $this->conn->prepare($request); // prepare the request in a statement
         $stmt->execute(); // execute the statement

@@ -25,19 +25,24 @@ class Order {
         $this->conn = $db;
     }
   
-    /*function getAllByUser($userId) {
-        $query = "SELECT * FROM $this->table_name 
-            JOIN order_items ON $this->table_name.order_id = order_items.order_id
-            WHERE $this->table_name.user_id = $userId";
-      
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
+    function getCurrentOrder($connected, $user_id) {
+        $sessionID = session_id();
 
+        if ($connected) {
+            // $request = "SELECT * FROM $this->table_name WHERE user_session IS NULL AND user_id = '$user_id' AND payment_status = 'false'";
+            $request = "SELECT * FROM $this->table_name WHERE user_session = 'NULL' AND user_id = '$user_id' AND payment_status = 'false'";
+        } else {
+            $request = "SELECT * FROM $this->table_name WHERE user_session = '$sessionID' AND user_id = '$user_id' AND payment_status = 'false'";
+        }
+        // var_dump($request);
+
+        $stmt = $this->conn->prepare($request); // prepare the request in a statement
+        $stmt->execute(); // execute the statement
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $rows = $result ? $stmt->fetchAll() : [];
+        $row = $result ? $stmt->fetch() : null;
 
-        return $rows;
-    }*/
+        return $row;
+    }
 
     function updateTotalPrice($price, $order_id) {
         $request = "UPDATE $this->table_name SET `total_price` = $price WHERE `order_id` = $order_id";
@@ -49,12 +54,27 @@ class Order {
         return $row;
     }
 
-    /*function create($productId, $userId) {
-        $request = "INSERT INTO $this->table_name (user_id, product_id) VALUES ('$userId', '$productId')";
+    function updateSessionID($user_id, $session_id) {
+        $request = "UPDATE $this->table_name SET `user_session` = '$session_id' WHERE `user_id` = $user_id";
+        // var_dump($session_id, $request);
+
+        $stmt = $this->conn->prepare($request); // prepare the request in a statement
+        $stmt->execute(); // execute the statement
+        $row = $stmt->rowCount() > 0 ? true : false;
+
+        return $row;
+    }
+
+    function create($userId, $userSession, $connected) {
+        if ($connected) {
+            $request = "INSERT INTO $this->table_name (user_id) VALUES ('$userId')";
+        } else {
+            $request = "INSERT INTO $this->table_name (user_id, user_session) VALUES ('$userId', '$userSession')";
+        }
 
         $stmt = $this->conn->prepare($request); // prepare the request in a statement
         $stmt->execute();
-    }*/
+    }
 
     function delete($id) {
         $query = "DELETE FROM $this->table_name WHERE order_id = $id";

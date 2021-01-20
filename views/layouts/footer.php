@@ -140,5 +140,6 @@ unset($_SESSION['errors']);
     <script src="<?php echo APP_ROOT; ?>/assets/js/form-validator.min.js"></script>
     <script src="<?php echo APP_ROOT; ?>/assets/js/contact-form-script.js"></script>
     <script src="<?php echo APP_ROOT; ?>/assets/js/custom.js"></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/main.js"></script>
 </body>
 </html>

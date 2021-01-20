@@ -10,6 +10,7 @@ class WishlistController extends Controller {
 		if ($userId) {
 			$wishlist_items = $this->model('Wishlist')->getAllByUser($userId);
 
+			$this->currentShoppingCart();
 			$this->view('pages/wishlist', ['wishlist_items' => $wishlist_items]);
 		} else {
   			$this->view('404');

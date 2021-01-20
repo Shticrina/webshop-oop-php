@@ -262,19 +262,19 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
 
                             <div class="d-flex">
                                 <h4>Discount</h4>
-                                <div class="ml-auto font-weight-bold"> $ 40 </div>
+                                <div class="ml-auto font-weight-bold"> $ 0 </div>
                             </div>
 
                             <hr class="my-1">
 
                             <div class="d-flex">
                                 <h4>Coupon Discount</h4>
-                                <div class="ml-auto font-weight-bold"> $ 10 </div>
+                                <div class="ml-auto font-weight-bold"> $ 0 </div>
                             </div>
 
                             <div class="d-flex">
                                 <h4>Tax</h4>
-                                <div class="ml-auto font-weight-bold"> $ 2 </div>
+                                <div class="ml-auto font-weight-bold"> $ 0 </div>
                             </div>
 
                             <div class="d-flex">
@@ -286,7 +286,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
 
                             <div class="d-flex gr-total">
                                 <h5>Grand Total</h5>
-                                <div class="ml-auto h5"> $ 388 </div>
+                                <div class="ml-auto h5"> $ <?php echo $totalPrice; ?> </div>
                             </div>
 
                             <hr>

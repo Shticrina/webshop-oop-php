@@ -7,6 +7,65 @@ class CartController extends Controller {
 		$this->view('pages/cart');
 	}
 
+	public function add() {
+		session_start();
+
+  		$product_id = isset($_POST['productId']) ? $_POST['productId'] : null;
+  		$price = isset($_POST['price']) ? $_POST['price'] : null;
+  		$quantity = isset($_POST['quantity']) ? $_POST['quantity'] : null;
+  		$image = isset($_POST['image']) ? $_POST['image'] : null;
+  		$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+  		$connected = isset($_SESSION['user']) && isset($_SESSION['user']['user_id']);
+  		$nb_items = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : 0;
+  		$user_session = session_id();
+  		$total_price = 0;
+  		$new_item = false;
+
+  		if ($product_id && $price && $image && $quantity && $user_id) {
+	  		$order = $this->model('Order')->getCurrentOrder($connected, $user_id);
+
+			if (!$order) {
+				// create first order
+				$order = $this->model('Order')->create($user_id, $user_session, $connected);
+			}
+
+  			if ($order) {
+  				// verify if order item already exists in the db
+	  			$item = $this->model('OrderItem')->getByOrderAndProductId($order['order_id'], $product_id);
+
+  				if ($item) {
+					$newQuantity = $item['quantity']+$quantity;
+					$item['quantity'] = $newQuantity;
+
+  					// update quantity for existing item
+		  			$updateItem = $this->model('OrderItem')->updateQty($item['id'], $newQuantity);
+  				} else {
+		  			// add new order item to the db order items
+		  			$this->model('OrderItem')->create($order['order_id'], $product_id, $price, $image, $quantity);
+		  			$item = $this->model('OrderItem')->getByOrderAndProductId($order['order_id'], $product_id);
+		  			$new_item = true;
+  				}
+
+  				$nb_items += $quantity;
+  				$total_price = $order['total_price'] + $price*$quantity;
+  				$_SESSION['cartItemsNb'] = $nb_items;
+
+  				// update order total price
+				$this->model('Order')->updateTotalPrice($total_price, $order['order_id']);
+
+		    	echo json_encode([
+		    		'success' => 1, 
+		    		'totalPrice' => $total_price,
+		    		'cartItemsNb' => $nb_items,
+		    		'new_item' => $new_item,
+		    		'item' => $item
+		    	]);
+	  		}
+  		} else {
+    		echo json_encode(['success' => 0]);
+    	}
+  	}
+
   	public function update() {
   		$items = isset($_POST['items']) ? json_decode($_POST['items']) : null;
   		$order_id = isset($_POST['orderId']) ? json_decode($_POST['orderId']) : null;

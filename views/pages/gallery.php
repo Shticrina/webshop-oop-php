@@ -46,6 +46,8 @@ unset($_SESSION['success_message']);
                 <?php if (isset($success_message)) { ?>
                     <h3 class="text-kaki font-italic mb-1"><?php echo $success_message; ?></h3>
                 <?php } ?>
+
+                <h3 id="successMessage" class="text-kaki font-italic mb-1"></h3>
             </div> 
         </div>
 
@@ -79,7 +81,8 @@ unset($_SESSION['success_message']);
                                     </li>
                                     <?php } ?>
                                 </ul>
-                                <a class="cart" href="#">Add to Cart</a>
+
+                                <a class="cart" id="addToCartBtn<?php echo $product['id']; ?>" href="javascript:void(0)" data-price="<?php echo $product['price']; ?>" data-quantity="1" data-image="<?php echo $product['image']; ?>" onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</a>
                             </div>
                         </div>
                     </div>

@@ -17,6 +17,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
     <div class="container" id="cartPageContainer">
         <div class="d-flex justify-content-start">
             <h3 id="cartMessage" class="text-kaki font-italic"></h3>
+            <h3 id="successMessage" class="text-kaki font-italic"></h3>
         </div>
 
         <?php if (isset($cartItemsNb) && $cartItemsNb > 0) { ?>
@@ -51,12 +52,10 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                                             <p>$ <?php echo $item['price']; ?></p>
                                         </td>
 
-        <!-- *************************************************************** -->
                                         <td class="quantity-box">
                                             <input type="hidden" name="orderId" value="<?php echo $item['order_id']; ?>">
                                             <input type="number" name="itemQty" data-id="<?php echo $item['id']; ?>" size="4" value="<?php echo $item['quantity']; ?>" min="0" max="<?php echo $item['stock']; ?>" step="1" class="c-input-text qty text">
                                         </td>
-        <!-- *************************************************************** -->
 
                                         <td class="total-pr">
                                             <p>$ <?php echo $item['quantity']*$item['price']; ?></p>
@@ -111,19 +110,19 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
 
                         <div class="d-flex">
                             <h4>Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 40 </div>
+                            <div class="ml-auto font-weight-bold"> $ 0 </div>
                         </div>
 
                         <hr class="my-1">
 
                         <div class="d-flex">
                             <h4>Coupon Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 10 </div>
+                            <div class="ml-auto font-weight-bold"> $ 0 </div>
                         </div>
 
                         <div class="d-flex">
                             <h4>Tax</h4>
-                            <div class="ml-auto font-weight-bold"> $ 2 </div>
+                            <div class="ml-auto font-weight-bold"> $ 0 </div>
                         </div>
 
                         <div class="d-flex">
@@ -135,7 +134,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
 
                         <div class="d-flex gr-total">
                             <h5>Grand Total</h5>
-                            <div class="ml-auto h5"> $ 388 </div>
+                            <div class="ml-auto h5"> $ <span id="grandTotal"><?php echo $totalPrice; ?></span> </div>
                         </div>
                         
                         <hr>
@@ -213,6 +212,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
                 if (data.cartItems.length > 0) {
                     // update sub total in cart page & header sidebar cart
                     $("#subTotalCart").text(data.totalPrice);
+                    $("#grandTotal").text(data.totalPrice);
 
                     // show success message above the table
                     $("#cartMessage").text('Shopping Cart successfully updated.');
@@ -228,7 +228,6 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
     }
 
     function deleteFromCart(itemId) {
-        // ******************** js fetch Ajax example ********************
         var body = new FormData;
         body.append("id", itemId);
 

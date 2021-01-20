@@ -6,12 +6,12 @@ class PagesController extends Controller {
 		$categories = $this->model('Category')->getAllCategories();
   		$products = $this->model('Product')->getAllProducts();
 
-  		$this->getShoppingCartItems();
+  		$this->currentShoppingCart();
 	    $this->view('welcome', ['categories' => $categories, 'products' => $products]);
   	}
   	
 	public function about() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
 		$this->view('pages/about');
 	}
 
@@ -20,7 +20,7 @@ class PagesController extends Controller {
 		$products = $this->model('Product')->getAllProducts();
 
 	    $this->getWishlistProductIds();
-	    $this->getShoppingCartItems();
+	    $this->currentShoppingCart();
 	    $this->view('pages/gallery', ['categories' => $categories, 'products' => $products]);
 	}
 
@@ -37,7 +37,7 @@ class PagesController extends Controller {
 		}
 
 	    $this->getWishlistProductIds();
-	    $this->getShoppingCartItems();
+	    $this->currentShoppingCart();
 	    $this->view('pages/shop', ['categories' => $completeCategories, 'products' => $products]);
 	}
 
@@ -52,32 +52,32 @@ class PagesController extends Controller {
 	}*/
 
 	public function checkout() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
 		$this->view('pages/checkout');
 	}
 
 	public function contactUs() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
 		$this->view('pages/contact-us');
 	}
 
 	public function myAccount() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
 		$this->view('pages/my-account');
 	}
 
 	public function register() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
 		$this->view('auth/register');
 	}
 
 	public function login() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
 		$this->view('auth/login');
 	}
 
 	public function notFound() {
-		$this->getShoppingCartItems();
+		$this->currentShoppingCart();
   		$this->view('404');
   	}
 }

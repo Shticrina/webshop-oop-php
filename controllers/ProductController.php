@@ -5,6 +5,7 @@ class ProductController extends Controller {
 	public function detail($slug) { // slug
 		$product = $this->model('Product')->getProduct($slug);
 		$this->getWishlistProductIds();
+		$this->currentShoppingCart();
 		
 		if ($product) {
 			$this->view('product/show', ['product' => $product]);

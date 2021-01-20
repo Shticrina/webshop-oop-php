@@ -6,7 +6,6 @@ $products = $data['products'];
 $categories = $data['categories'];
 $cart_items = isset($_SESSION['cartItems']) ? $_SESSION['cartItems'] : null;
 $cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
-// var_dump($cartItemsNb, $cart_items); // 32
 ?>
 
 <!-- HTML content -->

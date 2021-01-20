@@ -24,6 +24,8 @@ unset($_SESSION['success_message']);
                 <?php if (isset($success_message)) { ?>
                     <h3 class="text-kaki font-italic mb-2 pl-3"><?php echo $success_message; ?></h3>
                 <?php } ?>
+
+                <h3 id="successMessage" class="text-kaki font-italic mb-2 pl-3"></h3>
             </div>
 
 			<div class="col-xl-5 col-lg-5 col-md-6">
@@ -80,7 +82,7 @@ unset($_SESSION['success_message']);
 						<li>
 							<div class="form-group quantity-box">
 								<label class="control-label">Quantity</label>
-								<input class="form-control" value="0" min="0" max="20" type="number">
+								<input class="form-control" id="inputQty" value="0" min="0" max="<?php echo $product['stock']; ?>" type="number">
 							</div>
 						</li>
 					</ul>
@@ -88,28 +90,15 @@ unset($_SESSION['success_message']);
 					<div class="price-box-bar">
 						<div class="cart-and-bay-btn">
 							<a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
-							<a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
+
+							<!-- <a class="btn hvr-hover" data-fancybox-close="">Add to cart</a> -->
+							<a class="btn hvr-hover add-to-cart-show" data-fancybox-close="" id="addToCartBtn<?php echo $product['id']; ?>" href="javascript:void(0)" data-price="<?php echo $product['price']; ?>" data-quantity="1" data-image="<?php echo $product['image']; ?>" onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</a>
 						</div>
 					</div>
 
-					<!-- <div class="add-to-btn">
-						<div class="add-comp">
-							<a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
-							<a class="btn hvr-hover" href="#"><i class="fas fa-sync-alt"></i> Add to Compare</a>
-						</div>
-
-						<div class="share-bar">
-							<a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-							<a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
-							<a class="btn hvr-hover" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-							<a class="btn hvr-hover" href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
-							<a class="btn hvr-hover" href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-						</div>
-					</div> -->
-
 					<div class="add-to-btn d-flex justify-content-between">
 						<div class="add-comp flex-fill d-flex">
-							<?php if (!in_array($product['id'], $wishlistProductIds) && $user) { ?>
+							<?php if ($wishlistProductIds && !in_array($product['id'], $wishlistProductIds) && $user) { ?>
 								<form action="/wishlist/add" method="POST">
                                     <input type="hidden" name="current_route" value="<?php echo $current_route; ?>">
                                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
@@ -389,3 +378,12 @@ unset($_SESSION['success_message']);
 <?php include('./views/layouts/instagramFeed.php'); ?>
 <?php include('./views/layouts/footer.php'); ?>
 <!-- end HTML content -->
+
+<script>
+	
+	$("#inputQty").change(function() {
+		// console.log($("#inputQty").val());
+		$(".add-to-cart-show").attr('data-quantity', $("#inputQty").val());
+	});
+
+</script>

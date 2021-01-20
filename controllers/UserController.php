@@ -31,6 +31,7 @@ class UserController extends Controller {
 		  		$newUser = $this->userModel->getUserByEmail($user['email']); // array OR false
 
 		  		$_SESSION['user'] = $newUser;
+		  		$_SESSION['user_id'] = $newUser['user_id'];
 		  		$_SESSION['success_message'] = "Successfully registered. <br/>You are now connected.";
 
 				header('location: /');
@@ -58,13 +59,23 @@ class UserController extends Controller {
 
 		        // check if the user email exists in the db & if password match
 		        if ($currentUser != false) {
+		        	$user_id = $currentUser['user_id'];
+
 		            if (password_verify($data['values']['password'], $currentUser['password'])) {
 		                $_SESSION['user'] = $currentUser;
+		                $_SESSION['user_id'] = $user_id;
 
 		                // update user in the db: is_connected = true
-		                $updateUser = $this->userModel->updateUserByConnection($currentUser['user_id'], true); // true or false
+		                $updateUser = $this->userModel->updateUserByConnection($user_id, 1); // true or false
 
 		                if ($updateUser) {
+		                	$order = $this->model('Order')->getCurrentOrder(false, $user_id);
+
+							if ($order) {
+								// update order user_session to NULL
+								$updateOrder = $this->model('Order')->updateSessionID($user_id, 'NULL');
+							}
+
 		                    $_SESSION['user']['is_connected'] = true;
 		                    $_SESSION['success_message'] = "You are now logged in.";
 		                    
@@ -209,19 +220,27 @@ class UserController extends Controller {
 		$data = [];
 		session_start();
 
+		$sessionID = session_id();
 		$userId = isset($_SESSION['user']) ? $_SESSION['user']['user_id'] : null;
 
 		// update user in the db: is_connected = false
 		$updateUser = isset($userId) ? $this->userModel->updateUserByConnection($userId, 0) : false;
 
 		if ($updateUser) {
+			// echo "updated user";
+			$order = $this->model('Order')->getCurrentOrder(true, $userId);
+
+			if ($order) {
+				// update order user_session to current session id
+				$updateOrder = $this->model('Order')->updateSessionID($userId, $sessionID);
+			}
+
 			$_SESSION['success_message'] = "You are now disconnected.";
 
 			// Go to homepage after signing out
 			header('location: /');
 
 			// Delete session user
-			// session_destroy();
 			unset($_SESSION['user']);
 			unset($_SESSION['cartItems']);
 			unset($_SESSION['cartItemsNb']);
