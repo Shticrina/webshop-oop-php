@@ -20,6 +20,7 @@ class CartController extends Controller {
   		$user_session = session_id();
   		$total_price = 0;
   		$new_item = false;
+  		// var_dump($product_id, $price, $image, $quantity, $user_id);
 
   		if ($product_id && $price && $image && $quantity && $user_id) {
 	  		$order = $this->model('Order')->getCurrentOrder($connected, $user_id);

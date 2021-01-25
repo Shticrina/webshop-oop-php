@@ -19,6 +19,7 @@ function addToCart(productId) {
     $.ajax({
         type: "POST",
         url: "http://localhost/cart/add",
+        // url: "http://freshshop-mvc-php.great-site.net/cart/add", // prod
         data: data
     }).then((response) => {
         var data = JSON.parse(response);
@@ -26,6 +27,7 @@ function addToCart(productId) {
         console.log(response, data);
 
     /*fetch('http://localhost/cart/add', {
+    /*fetch('http://freshshop-mvc-php.great-site.net/cart/add', { // prod
         method: "POST",
         // headers: { 'Content-Type': 'application/json' },
         body: body

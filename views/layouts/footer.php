@@ -132,7 +132,7 @@ unset($_SESSION['errors']);
     <script src="<?php echo APP_ROOT; ?>/assets/js/jquery.superslides.min.js"></script>
     <script src="<?php echo APP_ROOT; ?>/assets/js/bootstrap-select.js"></script>
     <script src="<?php echo APP_ROOT; ?>/assets/js/inewsticker.js"></script>
-    <script src="<?php echo APP_ROOT; ?>/assets/js/bootsnav.js."></script>
+    <script src="<?php echo APP_ROOT; ?>/assets/js/bootsnav.js"></script>
     <script src="<?php echo APP_ROOT; ?>/assets/js/images-loded.min.js"></script>
     <script src="<?php echo APP_ROOT; ?>/assets/js/isotope.min.js"></script>
     <script src="<?php echo APP_ROOT; ?>/assets/js/owl.carousel.min.js"></script>

@@ -203,6 +203,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
         body.append('orderId', orderId);
 
         fetch('http://localhost/cart/update', {
+        // fetch('http://freshshop-mvc-php.great-site.net/cart/update', { // prod
             method: "POST",
             body: body
         })
@@ -232,6 +233,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
         body.append("id", itemId);
 
         fetch('http://localhost/cart/deleteItem', { method: "POST", body: body})
+        // fetch('http://freshshop-mvc-php.great-site.net/cart/deleteItem', { method: "POST", body: body}) // prod
         .then((res) => res.json()) // response
         .then((data) => { // data
             // console.log(data);
