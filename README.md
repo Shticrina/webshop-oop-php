@@ -32,4 +32,4 @@ Freshshop already owns the frontend part of the project. You must now implement 
 
 ### See the website
 
-[***go live***](http://webshop-oop-cristina.great-site.net/)
+[***go live***](http:/freshshop-mvc-php.great-site.net/)
