@@ -7,6 +7,13 @@ class Database {
 	private $user = 'root';
 	private $password = '';
 	private $database = 'webshop_db';
+
+	// production
+	/*private $host = 'sql100.epizy.com';
+	private $user = 'epiz_27771583';
+	private $password = 'WoXoicYopjv';
+	private $database = 'epiz_27771583_freshshop';*/
+
 	private $conn;
 
 	public function getConnection() {

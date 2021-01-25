@@ -10,7 +10,6 @@
 
     <!-- Site Metas -->
     <title>Freshshop <?php echo "/ ".ucfirst(APP_PAGE); ?></title>
-    <title>Freshshop <?php //echo isset($page_title) ? '/ '.ucfirst($page_title) : ''; ?></title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">

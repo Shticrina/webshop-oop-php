@@ -58,8 +58,6 @@ unset($_SESSION['success_message']);
                                         <td class="quantity-box"><?php echo $item['stock'] > 0 ? 'In stock' : 'Out of stock'; ?></td>
 
                                         <td class="add-pr">
-                                            <!-- <a class="btn hvr-hover <?php //echo $item['stock'] == 0 ? 'disabled' : ''; ?>" href="#" >Add to Cart</a> -->
-
                                             <a class="btn hvr-hover <?php echo $item['stock'] == 0 ? 'disabled' : ''; ?>" id="addToCartBtn<?php echo $item['id']; ?>" href="javascript:void(0)" data-price="<?php echo $item['price']; ?>" data-quantity="1" data-image="<?php echo $item['image']; ?>" onclick="addToCart(<?php echo $item['id']; ?>)">Add to Cart</a>
                                         </td>
 
