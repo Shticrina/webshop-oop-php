@@ -1,12 +1,19 @@
 <?php
 
+/*require_once __DIR__.'/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotenv->load();*/
+
+// var_dump($_ENV["DB_HOST"]);
+
 include('config/Database.php');
 include('config/Mail.php');
 
 class Controller {
 
 	protected function model($model) {
-		$database = new Database();
+		$database = new Database($_ENV["DB_HOST"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"], $_ENV["DB_NAME"]);
 		$conn = $database->getConnection();
 
 		if (file_exists('models/' . $model . '.php')) {
@@ -26,7 +33,8 @@ class Controller {
 	}
 
 	protected function sendEmail($from, $fromName, $subject, $body) {
-		$mail = new Mail();
+		$mail = new Mail($_ENV["MAIL_HOST"], $_ENV["MAIL_PORT"], $_ENV["MAIL_USERNAME"], $_ENV["MAIL_PASSWORD"]);
+		
 		$mail->config->SetFrom($from, $fromName); // From email address and name
 		$mail->config->Subject = $subject;
 		$mail->config->Body = $body;

@@ -6,6 +6,7 @@ $cart_items = isset($_SESSION['cartItems']) ? $_SESSION['cartItems'] : null;
 $cartItemsNb = isset($_SESSION['cartItemsNb']) ? $_SESSION['cartItemsNb'] : null;
 $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
 // var_dump($totalPrice);
+// var_dump($_ENV["DB_HOST"]);
 ?>
 
 <!-- Start Main Top -->
@@ -203,7 +204,7 @@ $totalPrice = isset($_SESSION['totalPrice']) ? $_SESSION['totalPrice'] : 0;
             <div class="col-lg-12">
                 <h2><?php echo ucfirst(APP_PAGE); ?></h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="#"><?php echo $_ENV["APP_NAME"]; ?></a></li>
                     <li class="breadcrumb-item active"><?php echo ucfirst(APP_PAGE); ?></li>
                 </ul>
             </div>

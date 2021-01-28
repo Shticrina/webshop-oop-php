@@ -3,18 +3,18 @@
 class Database {
 
 	// MySQL DB connection details
-	private $host = 'localhost';
-	private $user = 'root';
-	private $password = '';
-	private $database = 'webshop_db';
-
-	// production
-	/*private $host = 'sql100.epizy.com';
-	private $user = 'epiz_27771583';
-	private $password = 'WoXoicYopjv';
-	private $database = 'epiz_27771583_freshshop';*/
-
+	private $host;
+	private $user;
+	private $password;
+	private $database;
 	private $conn;
+
+	public function __construct($host, $user, $password, $database) {
+        $this->host = $host;
+        $this->user = $user;
+        $this->password = $password;
+        $this->database = $database;
+    }
 
 	public function getConnection() {
 		$this->conn = null;
@@ -26,7 +26,7 @@ class Database {
 		// Connect to MySQL and instantiate our PDO object
 		try {
 			$this->conn = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8", $this->user, $this->password, $options);
-			// echo "Connected successfully using classes!";
+			// echo "Connected successfully!";
 		} catch (PDOException $e) {
 			die("Connection failed: " . $e->getMessage());
 		}

@@ -10,22 +10,22 @@ class Mail {
 	// PHPMailer connection details
 	public $config;
 
-	public function __construct() {
+	public function __construct($host, $port, $username, $password) {
 		$this->config = new PHPMailer();
 
 		$this->config->isSMTP();
 		$this->config->SMTPAuth = true;
 		$this->config->SMTPSecure = 'ssl'; //tls
-		$this->config->Host = 'smtp.gmail.com';
-		$this->config->Port = '465';
 		$this->config->isHTML(true);
-		// $this->config->SMTPDebug = SMTP::DEBUG_SERVER;
 
-		$this->config->Username = 'cristinadinca.cd@gmail.com';
-		$this->config->Password = '************'; // have to change this
+		$this->config->Host = $host;
+		$this->config->Port = $port;
+		$this->config->Username = $username;
+		$this->config->Password = $password; // have to change this
 
 		//To address and name
-		$this->config->AddAddress('cristinadinca.cd@gmail.com');
+		$this->config->AddAddress($username);
+		// $this->config->SMTPDebug = SMTP::DEBUG_SERVER;
 	}
 }
 
