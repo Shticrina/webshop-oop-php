@@ -47,10 +47,21 @@ function addToCart(productId) {
             // update total price in header sidebar cart
             $("#headerTotalPrice").text(data.totalPrice);
 
-            if (data.new_item) {
+            if (data.new_item) { // if item doesn't exist in shopping cart
                 $(".no-items").remove();
+
                 // add new li in sidebar cart header
-                $list_item = $('<li id="sideCart'+data.item.id+'" class="cart-item-header"><a href="/product/detail/'+data.item.slug+'" class="photo"><img src="../..'+data.item.image+'" class="cart-thumb" alt=""></a><h6><a href="/product/detail/'+data.item.slug+'">'+data.item.name+'</a></h6><p><span id="itemQty'+data.item.id+'">'+data.item.quantity+'</span>x - <span class="price">$'+data.item.price+'</span></p></li>');
+                $list_item = $('<li id="sideCart'+data.item.id+'" class="cart-item-header"></li>');
+                $li_a = $('<a href="/product/detail/'+data.item.slug+'" class="photo"></a>'); // a in li
+                $li_img = $('<img src="../..'+data.item.image+'" class="cart-thumb" alt="">'); // img in a
+                $li_h6 = $('<h6><a href="/product/detail/'+data.item.slug+'">'+data.item.name+'</a></h6>'); // h6 in li
+                $li_p = $('<p><span id="itemQty'+data.item.id+'">'+data.item.quantity+'</span>x - <span class="price">$'+data.item.price+'</span></p>'); // p in li        
+
+                $li_img.appendTo($li_a);
+                $li_a.appendTo($list_item);
+                $li_h6.appendTo($list_item);
+                $li_p.appendTo($list_item);
+
                 $list_item.insertBefore($("#cart-list-header .total"));
             } else {
                 // update quantity in sidebar cart header
