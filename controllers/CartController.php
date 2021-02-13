@@ -11,7 +11,8 @@ class CartController extends Controller {
 		session_start();
 
   		$product_id = isset($_POST['productId']) ? $_POST['productId'] : null;
-  		$price = isset($_POST['price']) ? $_POST['price'] : null;
+  		$slug = isset($_POST['slug']) ? $_POST['slug'] : null;
+  		// $price = isset($_POST['price']) ? $_POST['price'] : null;
   		$quantity = isset($_POST['quantity']) ? $_POST['quantity'] : null;
   		$image = isset($_POST['image']) ? $_POST['image'] : null;
   		$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
@@ -20,9 +21,9 @@ class CartController extends Controller {
   		$user_session = session_id();
   		$total_price = 0;
   		$new_item = false;
-  		// var_dump($product_id, $price, $image, $quantity, $user_id);
+  		// var_dump($product_id, $slug, $image, $quantity, $user_id);
 
-  		if ($product_id && $price && $image && $quantity && $user_id) {
+  		if ($product_id && $slug && $image && $quantity && $user_id) {
 	  		$order = $this->model('Order')->getCurrentOrder($connected, $user_id);
 
 			if (!$order) {
@@ -36,6 +37,9 @@ class CartController extends Controller {
   				// verify if order item already exists in the db
 	  			$item = $this->model('OrderItem')->getByOrderAndProductId($order['order_id'], $product_id);
 
+				// Get product price from products table
+	  			$product = $this->model('Product')->getProduct($slug);
+	  			
   				if ($item) {
 					$newQuantity = $item['quantity']+$quantity;
 					$item['quantity'] = $newQuantity;
@@ -44,13 +48,13 @@ class CartController extends Controller {
 		  			$updateItem = $this->model('OrderItem')->updateQty($item['id'], $newQuantity);
   				} else {
 		  			// add new order item to the db order items
-		  			$this->model('OrderItem')->create($order['order_id'], $product_id, $price, $image, $quantity);
+		  			$this->model('OrderItem')->create($order['order_id'], $product_id, $product['price'], $image, $quantity);
 		  			$item = $this->model('OrderItem')->getByOrderAndProductId($order['order_id'], $product_id);
 		  			$new_item = true;
   				}
 
   				$nb_items += $quantity;
-  				$total_price = $order['total_price'] + $price*$quantity;
+  				$total_price = $order['total_price'] + $product['price']*$quantity;
   				$_SESSION['cartItemsNb'] = $nb_items;
 
   				// update order total price

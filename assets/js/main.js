@@ -5,13 +5,14 @@ function addToCart(productId) {
     // var body = new FormData;
 
     /*body.append('productId', productId);
-    body.append('price', addToCartBtn.dataset.price);
+    body.append('slug', addToCartBtn.dataset.slug);
     body.append('quantity', addToCartBtn.dataset.quantity);
     body.append('image', addToCartBtn.dataset.image);*/
 
     let data = {
         "productId": productId,
-        "price": addToCartBtn.dataset.price,
+        "slug": addToCartBtn.dataset.slug,
+        // "price": addToCartBtn.dataset.price,
         "quantity": addToCartBtn.dataset.quantity,
         "image": addToCartBtn.dataset.image
     };
